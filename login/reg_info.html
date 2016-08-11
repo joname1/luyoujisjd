@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		
+		<style>
+			html,
+			body {
+				width: 100%;
+			}
+			
+			.mui-content {
+				width: 100%;
+				margin-top: 20px;
+			}
+			
+			.phone_div input[type='text'] {
+				width: 60%;
+				font-size: 14px;
+			}
+			
+			
+			.content_reg_div {
+				padding: 0 30px;
+			}
+			/*输入框样式  选择框样式*/
+			
+			.reg_div input[type='text'] {
+				width: 88%;
+				font-size: 14px;
+			}
+			#license_info a{
+				color: #FF0066;
+			}
+			.login{
+				margin:20px 0 0 0 ;
+				background: #FF0066;
+				color: #fff;
+				line-height: 30px;
+				font-size: 16px;
+				border: none;
+			}
+		#input_phonenum,#input_ckcode,#input_yqcode{width:64%;}
+		#get_ckcode,#get_ckcode1{ width: 90px; background: #DDDDDD; color: #fff; border: solid 1px #DDDDDD;}
+			* {
+				font-size: 12px;
+			}
+			label{ width: 30% !important; font-size: 13px ; margin-top: 5px !important;}
+			input{ font-size: 15px ; margin-top: 0px !important;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title">个人信息</h1>
+		</header>
+		<div class="mui-content"> 
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>真实姓名</label>
+					<input id='coach_name' type="text" class="mui-input-clear mui-input" placeholder="请输入真实姓名">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input id='coach_pwd' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row">
+					<label>确认密码</label>
+					<input id='coach_pwd_confirm' type="password" class="mui-input-clear mui-input" placeholder="请输入确认密码">
+				</div>
+				<div class="mui-input-row">
+					<label>性别</label>
+					<div  style="width: 65%; float: right;">
+					<div class=" mui-radio mui-left" style="width: 50%;float: left;">
+						<label style="padding-left: 35px; line-height: 0.5;">男</label>
+						<input name="coach_sex" checked="checked" type="radio" style="left: 0;" value="男">
+					</div>
+					<div class=" mui-radio mui-left" style="width: 50%; float: left;">
+						<label style="padding-left: 35px;line-height: 0.5;">女</label>
+						<input name="coach_sex" type="radio" style="left: 0;" value="女">
+					</div>
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label>年龄</label>
+					<input id='coach_age' type="number"  class="mui-input-clear mui-input" placeholder="请输入年龄">
+				</div>
+				<div class="mui-input-row">
+					<label>身份证号</label>
+					<input id='coach_number' type="text" class="mui-input-clear mui-input" placeholder="请输入身份证号">
+				</div>
+				<div class="mui-input-row">
+					<label>车型</label>
+					<button id='showUserPicker' class="mui-btn mui-btn-block" style="border: none; width: 65%; text-align: left;padding: 15px 0 0;color: #999;"  type='button'>请选择车型</button>					
+					<input id='coach_car_type' type="text" class="mui-input-clear mui-input" style="display: none;" >
+				</div>
+				<div class="mui-input-row">
+					<label>车牌号</label>
+					<input id='coach_car_number' type="text" class="mui-input-clear mui-input" placeholder="请输入车牌号">
+				</div>
+				<div class="mui-input-row">
+					<label>驾龄</label>
+					<input id='coach_long' type="number" class="mui-input-clear mui-input" placeholder="请输入驾龄">
+				</div>
+				<div class="mui-input-row">
+					<label>自我说明</label>
+					<input id='coach_myself' type="text" class="mui-input-clear mui-input" placeholder="请简短的自我介绍">
+				</div>
+				
+			</form>
+				<div align="center">
+				<button id='reg' class="mui-btn login" style="width:50%; margin-bottom: 30px;">下一步</button>
+			</div>
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/request_url.js"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					var userPicker = new $.PopPicker();
+					var url = request_url + "get_all_car";
+					mui.getJSON(url, function(rsp) {
+						console.log(JSON.stringify(rsp));
+						var car_data=[];
+						for(var i=0;i<rsp.Table.length;i++)
+						{
+							car_data.push({value:rsp.Table[i].car_pk,text:rsp.Table[i].car_name});
+						}
+						userPicker.setData(car_data);
+						var showUserPickerButton = doc.getElementById('showUserPicker');
+						var coach_car_type = doc.getElementById('coach_car_type');
+						showUserPickerButton.addEventListener('tap', function(event) {
+							userPicker.show(function(items) {							
+								showUserPickerButton.innerText=items[0].text;
+								showUserPickerButton.style.color="#000";
+								coach_car_type.value = items[0].value;
+									console.log(coach_car_type.value)
+								
+							});
+						}, false);
+					});													
+				});
+		$.plusReady(function() {	
+			plus.geolocation.getCurrentPosition( function ( p ) {
+			console.log( "Geolocation\nprovince:" + p.address.province + "\nLongitude:" + p.coords.longitude + "\nAltitude:" + p.coords.altitude );
+			console.log(JSON.stringify(p));
+			plus.storage.setItem('province',p.address.province);
+			plus.storage.setItem('city',p.address.city);
+			plus.storage.setItem('district',p.address.district);
+		}, function ( e ) {
+			console.log( "Geolocation error: " + e.message );
+		} );
+	
+					var regButton = doc.getElementById('reg');	
+					var coach_name = doc.getElementById('coach_name');	
+					var coach_pwd = doc.getElementById('coach_pwd');	
+					var coach_pwd_confirm = doc.getElementById('coach_pwd_confirm');	
+					var coach_sex = doc.getElementById('coach_sex');	
+					var coach_age = doc.getElementById('coach_age');	
+					var coach_number = doc.getElementById('coach_number');	
+					var coach_car_type = doc.getElementById('coach_car_type');	
+					var coach_car_number = doc.getElementById('coach_car_number');	
+					var coach_long = doc.getElementById('coach_long');	
+					var coach_myself = doc.getElementById('coach_myself');	
+					regButton.addEventListener('tap', function(event) {						
+						if(coach_name.value==""){mui.toast("真实姓名不能为空！");return;}
+						else plus.storage.setItem('coach_name',coach_name.value);						
+						if(coach_pwd.value==""){mui.toast("密码不能为空！");return;}
+						else plus.storage.setItem('coach_pwd',coach_pwd.value);
+						if(coach_pwd.value!=coach_pwd_confirm.value){mui.toast("确认密码不正确！");return;}
+						plus.storage.setItem('coach_sex',document.getElementsByName("coach_sex")[0].checked?"男":"女")						
+						if(coach_age.value==""){mui.toast("请输入您的年龄！");return;}
+						else plus.storage.setItem('coach_age',coach_age.value);
+						if(coach_number.value==""){mui.toast("身份证号不能为空！");return;}
+						else plus.storage.setItem('coach_number',coach_number.value);
+						if(coach_car_type.value==""){mui.toast("请选择您的车型！");return;}
+						else plus.storage.setItem('coach_car_type',coach_car_type.value);
+						if(coach_car_number.value==""){mui.toast("请输入车牌号！");return;}
+						else plus.storage.setItem('coach_car_number',coach_car_number.value);
+						if(coach_long.value==""){mui.toast("请输入您的驾龄！");return;}
+						else plus.storage.setItem('coach_long',coach_long.value);						
+						plus.storage.setItem('coach_myself',coach_myself.value);
+						location.href="reg_car_info.html";
+					});
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

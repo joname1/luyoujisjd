@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="ui-page">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<script src="js/common.js"></script>
+		<script type="text/javascript" src="js/request_url.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" type="text/css">
+		<link href="css/styles.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			mui.plusReady(function() {
+			
+				startPlay();
+				var strParam = textdecode1(plus.webview.currentWebview().param);
+				console.log("strParam==" + strParam);
+				var strParamStr = JSON.parse(strParam);
+				console.log("strParamStr==" + strParamStr);
+				/*初始化控件对象，获得id*/
+				var juli = document.getElementById("juli");
+				var chufadi = document.getElementById("chufadi");
+				var mudidi = document.getElementById("mudidi");
+				var qiangdan = document.getElementById("qiangdan");
+				var quanbu = document.getElementById("quanbu");
+				var shouche = document.getElementById("shouche");
+				juli.textContent = "距离" + strParamStr.Table[0].order_away + "公里";
+				chufadi.textContent = strParamStr.Table[0].start_address;
+				mudidi.textContent = strParamStr.Table[0].end_address;
+				var coach_pk = plus.storage.getItem("logincoach_pk");
+				var order_pk = strParamStr.Table[0].order_pk;
+				qiangdan.addEventListener("tap", function() {
+					
+					var url = request_url + "coach_and_order";
+					mui.ajax(url, {
+						data: {
+							"coach_pk": coach_pk,
+							"order_pk": order_pk
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 5000, //超时时间设置为5秒；
+						success: function(response) {							
+							if(parseInt(response.result)==100 || parseInt(response.result)==-100)
+							{								
+								mui.toast("抢单成功!");
+								mui.fire(plus.webview.getLaunchWebview(),'qiangdan_order',strParamStr);
+								mui.back();
+								mui.openWindow({
+									id: "daohang",
+									url: "daohang.html",
+									extras: {
+										end_lon: strParamStr.Table[0].end_lon,
+										end_lat: strParamStr.Table[0].end_lat,
+										end_address: strParamStr.Table[0].end_address,
+										coach_phone: strParamStr.Table[0].user_tel
+									}
+								});
+							}
+							else if(parseInt(response.result)==-100)
+							{
+							 	mui.toast("您有未完成订单，暂不能抢单!");
+								setTimeout("closeWindows()", 1000);
+							}
+							else if(parseInt(response.result)==-98)
+							{
+							 	mui.toast("抢单失败，车型不符!");
+								setTimeout("closeWindows()", 1000);
+							}
+							else if(parseInt(response.result)==-96)
+							{
+							 	mui.toast("账户余额不足，请充值!");		
+							 	var allPage = plus.webview.all();  
+							    for (var i = 0; i < allPage.length; i++){
+							      if(plus.webview.getLaunchWebview()!=allPage[i])
+							        plus.webview.close(allPage[i]);       
+							    }		
+							}
+							
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
+						}
+					});
+				})
+//				quanbu.addEventListener("click", function() {
+//					mui.openWindow({
+//						id: "graborder_list",
+//						url: "usercenter/graborder_list.html"
+//					});
+//					setTimeout("closeWindows()", 1000);
+//				})
+//				shouche.addEventListener("tap", function() {
+//					plus.storage.setItem("shouche", "true");
+//					setTimeout("closeWindows()", 500);
+//				})
+				setTimeout("closeWindows()", 10000);
+			})
+
+			function closeWindows() {
+				mui.currentWebview.close();
+			}
+			// 开始播放
+			function startPlay() {				
+				// if(plus.storage.getItem("YINXIAO")=="1")//!=
+				// {
+					  	plus.device.beep( 2 );
+				var p = plus.audio.createPlayer("img/neworder.mp3");
+							p.play(function() {}, function(e) {
+							console.log("播放音频文件失败：" + e.message);
+						}); 
+				//}
+			}
+		</script>
+		<style>
+			p span{
+				font-size: 18px;
+			}
+			label{
+				margin-left:-7%; 	
+			}
+			#chufadi,#mudidi{
+				font-size: 12px; 
+				line-height:40px;
+				padding: 10%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">	
+			<a id="close-btn" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title">
+			   <span>路邮寄</span>	
+			</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card" style="background: transparent; border: none; ">
+				<div class=" top_bg">
+					<p><span id="juli"></span></p>
+				</div>
+				<div class="mui-input-row" style="padding: 0 10px; margin: 20px 0;">
+					<label  style="color: #FF0066;line-height: 10px;">从</label>
+					
+					<span id="chufadi" style="font-size: 16px;line-height: 30px;"></span>
+				</div>
+				<div class="mui-input-row" style="padding: 0 10px;margin: 20px 0;">
+					<label  style="color: #FF0066;line-height: 10px;">到</label>
+					
+					<span id="mudidi" style="font-size: 16px;line-height: 30px;"></span>
+				</div>
+				<div class="mui-input-row" style="padding: 0 10px; border-top: solid 1px #ccc;"></div>
+				<div class="mui-row div_padding" style=" margin-top: 10%;">
+					<div class="mui-col mui-col-xs-6" style="float: none; margin: 0 auto;"><span id="qiangdan" style="font-size: 20px;height:80px;line-height: 80px;width:80px; border-radius: 80px; display: inline-block;margin: -20% 5% 0 5%;">抢单</span></div>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

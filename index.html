@@ -20,7 +20,7 @@
 			html,
 			body {
 				width: 100%;
-				height: 100%;
+				/*height: 100%;*/
 			}
 			
 			.mui-bar-tab .mui-tab-item {
@@ -95,10 +95,11 @@
 			#order_div_2>div,#order_div_3>div,#order_div_4>div{width:100%; text-align: center; line-height: 46px;}
 			.pick{
 				text-align: center;
-				margin-top: 200px;
+				/*margin-top: 200px;*/
 				}
 			.ad{
-				margin-top: 180px;
+				/*margin-top: 180px;*/
+				border-top:1px dashed #ccc;padding-top: 5px!important;
 			}
 		</style>
 	</head>
@@ -116,16 +117,24 @@
 			   <span>路邮寄·司机端</span>	
 			</h1>
 		</header>
-
-		<!-- PICK START -->
-		<div class="pick" id="order_div_1">
-			<a class="mui-tab-item" id="date_car">
-				<img src="img/btns.png" style="height:110px;width:110px;">
-			</a>
-		</div>
+			<!-- AD BANNER -->
+	<div class="ad mui-slider" style="margin-top: 50px;">
+	  <div class="mui-slider-group mui-slider-loop">
+	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+ 	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	  </div>
+	</div>	
 
 		<!-- AD BANNER -->
-	<div class="ad mui-slider">
+	<div class="ad mui-slider" style="">
 	  <div class="mui-slider-group mui-slider-loop">
 	    	<div class="mui-slider-item mui-slider-item-duplicate">
 	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
@@ -141,7 +150,15 @@
 	</div>
 
 	<!-- COPYRIGHT -->
-		<div class="cpr" style="text-align:center;margin-top:30px;">
+		<div class="cpr" style="text-align:center;margin-top:30px;position: fixed;bottom: 0;width: 100%;">
+			
+			<!-- PICK START -->
+		<div class="pick" id="order_div_1">
+			<a class="mui-tab-item" id="date_car">
+				<img src="img/btns.png" style="height:110px;width:110px;">
+			</a>
+		</div>
+		
 			<h5>Copyright <i class="fa fa-copyright"></i> 2016 易伙三商科技有限公司</h5>
 		</div>
 			<!-- <nav class="mui-bar-tab bar_transparent" id="order_div_1">
@@ -212,7 +229,6 @@
 		</div>
 	</body>
 	<script>
-	console.log('ddd');
 		var menu = null,
 			main = null;
 		var showMenu = false;
@@ -285,7 +301,7 @@
 					url: "login/login.html"
 				});
 			}
-			//检查更新	
+			//检查更新	 
 			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {					
 				mui.ajax(request_url + "get_update", {	
 					data: {
@@ -326,7 +342,7 @@
 			function getPosition() {
 				var mPoint = map.getCenter();
 				var lat = mPoint.lat; //获取到当前位置的纬度；			
-				var longt = mPoint.lng; //获取到当前位置的经度
+				var longt = mPoint.lng; //获取到当前位置的经度 
 				var url = "http://api.map.baidu.com/geocoder/v2/?ak=FC9c13967bf240823ed03d702d883e83&location=" + lat + "," + longt + "&output=json&pois=1"
 				mui.getJSON(url, function(rsp) {
 					if (rsp != null) {
@@ -644,10 +660,6 @@
 			
 		
 		function qiangdan(s){
-	
-		//	var s="{'Table':[{'RowIndex':'1','order_pk':'c82f11fb-0a7c-414d-bd77-8d737033e3fa','user_pk':'a31309c3-931d-4a9a-8f05-0280634aecb4','user_name':'','user_tel':'17792513817','user_sms':'0','order_type':'0','order_datetime':'2016-04-17','start_address':'沙井村','start_lon':'108.916313','start_lat':'34.227715','end_address':'牡丹园','end_lon':'108.895275','end_lat':'34.255498','order_away':'5.4','order_time':'18','coach_pk':'','car_meal_fee':'0.00','order_away_fee':'0.00','order_time_fee':'0.00','order_far_away_fee':'0.00','order_cut_fee':'0.00','order_fee':'0.00','order_rem':'','order_state':'0','create_time':'2016/4/17 14:20:19'}]}";
-  
-  // var s= '{"Table":[{"RowIndex":"1","order_pk":"a5709c4a-7ac4-45c2-8b99-e6961d7211d9","order_type":"2","user_tel":"15577729055","order_datetime":"2016-8-11&nbsp;17:28","start_address":"柳州市19路","start_lon":"109.419103","start_lat":"24.299448","end_address":"柳州市21路","end_lon":"109.411457","end_lat":"24.209085"}]}';
 
 			mui.openWindow({
 				id: "qiangdan",
@@ -658,8 +670,10 @@
 			});
 		}
 		function get_coach_order_info()
-		{
-//			setTimeout("get_coach_order_info()","2000");	
+		{	
+			
+			get_clientorder_list();//获得最新订单
+			setTimeout("get_coach_order_info()","2000");	
 			var coach_pk = plus.storage.getItem('logincoach_pk');		
 			var url = request_url + "get_coach_order_info";
 			mui.ajax(url, {
@@ -671,6 +685,7 @@
 				timeout: 5000, //超时时间设置为10秒；
 				success: function(response) {	
 					 
+		//	console.log(response.Table[0].order_state);
 					if(response.Table.length>0)
 					{
 						if(response.Table[0].order_state=="1")
@@ -682,7 +697,7 @@
 							go_start(response);
 						}
 						else if(response.Table[0].order_state=="2") 
-						{
+						{  
 							nav_info();
 							up_car_point=new BMap.Point(response.Table[0].start_lon,response.Table[0].start_lat);	
 							GetAwayAndTime();
@@ -701,7 +716,7 @@
 						}
 						else if(response.Table[0].order_state=="0")
 						{				
-							qiangdan(response.Table[0]);//抢单	
+							qiangdan(response.Table[0]);//抢单 
 						}
 						else
 						{							
@@ -808,7 +823,9 @@
 		}
 		/*获取客户端提交的订单列表*/
 			var tan =0 ;
+			
 		function get_clientorder_list() {
+			console.log('44');
 			coachLatPosArr = new Array();
 			coachLongtPosArr = new Array(); 
 			coachOrderPkArr = new Array();
@@ -838,7 +855,7 @@
 				type: 'post', //HTTP请求类型
 				timeout: 5000, //超时时间设置为5秒；
 				success: function(rsp) {
-					
+					console.log('sss'+rsp.Table.length);
 					if (preMarker.length > 0) {
 						for (var i = 0; i < preMarker.length; i++) {
 							map.removeOverlay(preMarker[i]);
@@ -851,7 +868,7 @@
 					console.log(rsp.Table[0].orderid+" 最新订单ID:"+tan + " 未接订单:"+ rsp.Table.length);
 					if(tan < rsp.Table[i].orderid ){
 						plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
-						qiangdan(s);//抢单
+						qiangdan(s);//抢单 
 					}
 					
 						coachLatPosArr[i] = rsp.Table[i].start_lat;

@@ -97,19 +97,19 @@
 				     			order_pk = rsp.Table[i].order_pk;
 				     			var order_type = rsp.Table[i].order_type;
 								 //判断订车类型
-								 if(0 == order_type)
+								 if(3 == order_type)
 					        	 {
 					        	 	strBtn="电动车";
 					        	 }
-					        	 else if(1 == order_type)
-					        	 {
-					        	 	strBtn="三轮车";
-					        	 }	
 					        	 else if(2 == order_type)
 					        	 {
 					        	 	strBtn="的士";
 					        	 }	
-					        	 else if(3 == order_type)
+					        	 else if(1 == order_type)
+					        	 {
+					        	 	strBtn="三轮车";
+					        	 }	
+					        	 else if(0 == order_type)
 					        	 {
 					        	 	strBtn="货车";
 					        	 }						        	 					        	 					        						         

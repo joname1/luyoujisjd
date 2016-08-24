@@ -11,31 +11,48 @@
 	</head>
 
 	<body>
+	<style>
+		.blackme{
+			background: black !important;color:white;border-radius: 0px
+		}
+		#order_content_div{
+			background-color: black;
+		}
+	</style>
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">我的钱包</h1>
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
 			<a open-type="common" class="mui-pull-right" href="withdraw.html" style="font-size:14px;margin-top: 12px; color: #fff;">申请提现</a>
 		</header>
 
-		<div class="mui-content">
+		<div class="mui-content blackme" style="color:black;">
 			<div class="mui-content-padded">
-				<p style="text-align: center;"><img src="../img/rebate_sz_coin.png" style="width:90px;height:90px;"></p>
+				<p style="text-align: center;"><img src="../img/rebate_sz_coin.png" style="width:60px;height:60px;"></p>
 				<p align="center">
-					<label style="font-size:20px;color: red;" id="yue">当前余额:￥0</label>
+					<label style="font-size:20px;color: green;" id="yue">当前余额:￥0</label>
+					<br /><br />
+					<label style="font-size:20px;color: red;" id="money">累计司机收入:￥0</label><br />
+					<label style="font-size:20px;color: red;" id="ticheng">累计团队佣金:￥0</label>
 				</p>				 				
 			</div>
+			<p style="text-align: center;">
+			<a href="withdrawlist.html"><button class="mui-btn mui-btn-negative">
+		    查看最近提现记录 
+		</button></a>
+			</p>
+			<div class="mui-content" id="order_content_div" style="height:500px;overflow-y:auto;">
+				<!--佣金列表-->
+			</div>
+		
 			<div class="mui-content-padded" style="position:fixed; right:0; bottom: 0;">
 				
-				<p style="text-align: right;">
-				<a open-type="common" href="withdrawlist.html" style="font-size:14px;">查看最近提现记录</a>
-				</p>
+
 			
 			</div>
 		</div>
 	</body>
-
 	<script type="text/javascript" charset="utf-8">
-	 mui.init();
+	mui.init();
 	mui.plusReady(function() {
 		var coach_pk = plus.storage.getItem("logincoach_pk");
 		var url = request_url + "get_coach_info";
@@ -47,14 +64,115 @@
 			type: 'post', //HTTP请求类型
 			timeout: 5000, //超时时间设置为5秒；
 			success: function(response) {
-				console.log(JSON.stringify(response));
+			//	console.log(JSON.stringify(response));
 				document.getElementById("yue").innerHTML="余额:￥" + (parseFloat(response.Table[0].coach_money) || 0).toFixed(2); 
+				coach_phone = response.Table[0].coach_phone;
 			},
 			error: function(xhr, type, errorThrown) {
 				//异常处理；
 				console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
 			}
 		});
+		
+		//收入
+		var url = request_url + "get_coach_money";
+		mui.ajax(url, {
+			data: {
+				"coach_pk": coach_pk				
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 5000, //超时时间设置为5秒；
+			success: function(response) {
+			//	console.log(JSON.stringify(response));
+				document.getElementById("money").innerHTML="累计司机收入:￥" + (parseFloat(response.Table[0].Column1)*0.77 || 0).toFixed(2);  
+			},  
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);  
+			}
+		});
+		
+		//佣金
+		var url = request_url + "get_coach_ticheng";
+		mui.ajax(url, {
+			data: {
+				"coach_pk": coach_pk				
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 5000, //超时时间设置为5秒；
+			success: function(response) {
+			//	console.log(JSON.stringify(response));
+				document.getElementById("ticheng").innerHTML="累计团队佣金:￥" + (parseFloat(response.Table[0].Column1)*0.03 || 0).toFixed(2); 
+			},  
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
+			}
+		});
+		
+		//佣金 及 提成 列表
+		var url = request_url + "get_coach_money_list";
+		mui.ajax(url, {
+			data: {
+				"coach_pk": coach_pk				
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 5000, //超时时间设置为5秒； 
+			success: function(response) {
+				console.log(JSON.stringify(response));
+			//	document.getElementById("ticheng").innerHTML="累计团队佣金:￥" + (parseFloat(response.Table[0].Column1)*0.03 || 0).toFixed(2); 
+			if(response.Table.length !=0)
+                        {
+                        	dyn_create_ui(response);
+                        	
+                        }
+			},
+			error: function(xhr, type, errorThrown) {
+				//异常处理；
+				console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
+			}
+		});
+		
+		
+		
+    var order_content_div = document.getElementById("order_content_div");
+		function dyn_create_ui(result)
+    {  
+        for(var i=0;i<result.Table.length;i++)
+        {            	
+        	 var order_fee=result.Table[i].order_fee;   	 
+        	 var strDate  = result.Table[i].create_time;  
+			 
+			 if(coach_pk == result.Table[i].coach_pk){
+        	 	var type ='个人';
+        	 	var color ='red';
+        	 	var str_rem = order_fee*0.77;
+        	 }else{
+        	 	var type ='团队';
+        	 	var color ='green';
+        		var	str_rem = order_fee*0.03;
+        	 } 
+        	 var str_username="订单金额：<font color='red'>￥" + order_fee+"</font>";
+        	 
+        	  strTemp =  '<div  name="order_detail_div"  class="mui-table-view-cell mui-card order_list_view">'
+        	               +'<div name="child_div">'
+        	               +'<span style="display:none">'+order_fee+'</span>'
+						   +'<p style="text-align:right;"><span class="mui-badge mui-pull-left"><font color="'+color+'">'+type+'</font></span>' +strDate+'</p>'
+						   +str_username
+						   +'<a style="color: #000000;float:right; font-size:14px;"><span>+'+str_rem.toFixed(2)+'</span></a>'
+						   +'</div>'
+//						   +'<div style="text-align: right; border-top: 1px solid #CCCCCC; padding: 10px 0 0 0;">'
+//						   +'<span class="mui-badge mui-badge-warning mui-pull-left" style="margin:8px 0; line-height:15px;" id="zt">'+strPayState+'</span>'	
+//						   +strshow		
+//						   +'</div>'
+				           +'</div>'
+			 order_content_div.innerHTML +=strTemp; 
+        }
+	}
+    
 				
 	});
 	</script>

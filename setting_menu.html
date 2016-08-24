@@ -242,7 +242,11 @@
 			var exit_li = document.getElementById("exit_li");
 			exit_li.addEventListener("tap", function() {
 				plus.storage.setItem("isServerlogin", "0");
-				mui.back();
+				mui.openWindow({
+					id: "login",
+					url: "login/login.html"
+				});
+//				mui.back();
 			});
 //			document.getElementById("navigate_share").addEventListener("tap", function() {
 //				shareShow();

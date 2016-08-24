@@ -126,21 +126,22 @@
 					read_message();
 				console.log(JSON.stringify(response));
 				var meslen = response.Table.length;
+				console.log(meslen);
 				//循环获取消息中心数据
 				if(0 != meslen)
 				{    
 					 for(var i =0; i< meslen;i++)
 					 {
 					 	 var message_type = response.Table[i].message_type;
-					  console.log("message_type==="+message_type);
+					  console.log(response.Table[i].user_pk+"message_type==="+message_type);
 						if(message_type == "1")  //系统
 						{   
-							system_message += (textdecode1("[系统]"+ response.Table[i].message_content)+"<br>");
+							system_message += (textdecode1("[系统]"+ response.Table[i].message_content)+"<hr>");
 							console.log("sytem_message==="+system_message);
 						}
 						else if(message_type == "2")  //用户
 						{   
-							coach_message += (textdecode1("[用户]"+response.Table[i].message_content)+"<br>");
+							coach_message += (textdecode1("[用户]"+response.Table[i].message_content)+"<hr>");
 							console.log("coach_message==="+coach_message);
 						}
 						 

@@ -7,7 +7,7 @@
 	"id": "luyoujisjd",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "路邮寄·司机版",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.8",/*应用版本名称*/
+		"name": "1.1.1",/*应用版本名称*/
 		"code": "84"
 	},
 	"description": "",/*应用描述信息*/
@@ -129,10 +129,6 @@
 					"weixin": {
 						"appid": "wx7bb3a33a1cec5fc8",
 						"description": "微信支付"
-					},
-					"alipay": {
-						"scheme": "zhifubao",
-						"description": "阿里支付"
 					}
 				},
 				"push": {
@@ -282,7 +278,10 @@
 					"img/araw.png",
 					"img/telephone_icon@2x_09.png",
 					"js/common.js",
-					"img/peple.png"
+					"img/peple.png",
+					"img/pick.jpg",
+					"img/btn.png",
+					"img/btns.png"
 				],
 				"refer": [
 					"login/login.html",
@@ -725,7 +724,9 @@
 					"css/mui.min.css",
 					"img/car.png"
 				],
-				"refer": [],
+				"refer": [
+					"daohang.html"
+				],
 				"priority": 0
 			},
 			"navigate/picker.html": {

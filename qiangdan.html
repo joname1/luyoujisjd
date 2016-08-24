@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="ui-page">
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -13,9 +12,9 @@
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 			mui.plusReady(function() {
-			
 				startPlay();
-				var strParam = textdecode1(plus.webview.currentWebview().param);
+			//	var strParam = plus.webview.currentWebview().param;
+				var strParam = textdecode2(plus.webview.currentWebview().param);
 				console.log("strParam==" + strParam);
 				var strParamStr = JSON.parse(strParam);
 				console.log("strParamStr==" + strParamStr);
@@ -134,7 +133,7 @@
 		<header class="mui-bar mui-bar-nav">	
 			<a id="close-btn" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
 			<h1 class="mui-title">
-			   <span>路邮寄</span>	
+			   <span>新订单</span>	
 			</h1>
 		</header>
 		<div class="mui-content">

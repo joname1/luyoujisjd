@@ -55,8 +55,8 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登录</h1>
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title">登陆</h1>
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>-->
 		</header>
 		<div class="mui-content">
 
@@ -70,7 +70,7 @@
 			</div>
 
 			<div align="center">
-				<button id='login' class="mui-btn login" style="width:50%;">登   录</button>
+				<button id='login' class="mui-btn login" style="width:50%;">登   陆</button>
 			</div>
 			<div class="mui-content-padded" align="center" style=" padding-top: 20px; ">				
 				<div class="link-area" >还没有账号？<a href='reg.html' style=" font-size: 14px;">立即注册</a> <!--<span class="spliter">&nbsp;|&nbsp;</span> <a href='forgetPassword.html' style=" font-size: 14px;">忘记密码</a>-->
@@ -105,7 +105,7 @@
 					type: 'post', //HTTP请求类型
 					timeout: 5000, //超时时间设置为10秒； 
 					success: function(response) {
-					
+					console.log(response.result);
 						if (-97 == response.result) {
 							mui.toast("密码错误！");
 							return;

@@ -1,0 +1,159 @@
+{
+  "index.html": {
+    "resources": [
+      "img/index_left_fresh_manual.png",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "img/iconfont-wujiaoxing.png",
+      "img/telephone_icon@2x_09.png",
+      "img/icon_lw_blue.png",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "fonts/iconfont.ttf",
+      "img/markers.png",
+      "img/pick.jpg",
+      "img/btn.png",
+      "img/btns.png"
+    ],
+    "refer": [
+      "login/login.html",
+      "setting_menu.html",
+      "usercenter/graborder_list.html"
+    ]
+  },
+  "login/login.html": {
+    "resources": [
+      "js/request_url.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "setting_menu.html": {
+    "resources": [
+      "img/freeride.png",
+      "css/customize.css",
+      "img/sprite.png",
+      "usercenter/recharge.html",
+      "fonts/mui.ttf",
+      "js/navigate.js",
+      "orderdistance.html",
+      "usercenter/purse.html",
+      "helpcenter/about.html",
+      "helpcenter/operation.html",
+      "usercenter/pop_link.html",
+      "usercenter/messagesetting.html",
+      "helpcenter/low.html",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "usercenter/recharge.html"
+    ]
+  },
+  "usercenter/recharge.html": {
+    "resources": [
+      "setting_menu.html"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "usercenter/purse.html": {
+    "resources": [
+      "setting_menu.html",
+      "img/rebate_sz_coin.png",
+      "usercenter/withdraw.html",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "usercenter/withdrawlist.html"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "orderdistance.html": {
+    "resources": [
+      "setting_menu.html"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "helpcenter/about.html": {
+    "resources": [
+      "setting_menu.html",
+      "js/common.js"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "usercenter/pop_link.html": {
+    "resources": [
+      "js/common.js",
+      "setting_menu.html",
+      "css/iconfont.css"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "usercenter/messagesetting.html": {
+    "resources": [
+      "setting_menu.html",
+      "js/common.js"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "helpcenter/operation.html": {
+    "resources": [
+      "setting_menu.html",
+      "img/telephone_icon@2x_09.png"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "helpcenter/low.html": {
+    "resources": [
+      "setting_menu.html"
+    ],
+    "refer": [
+      "setting_menu.html"
+    ]
+  },
+  "usercenter/graborder_list.html": {
+    "resources": [
+      "js/request_url.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "usercenter/withdraw.html": {
+    "resources": [
+      "usercenter/purse.html"
+    ],
+    "refer": [
+      "usercenter/purse.html"
+    ]
+  },
+  "usercenter/withdrawlist.html": {
+    "resources": [
+      "usercenter/purse.html",
+      "js/jquery-1.7.2.js"
+    ],
+    "refer": [
+      "usercenter/purse.html"
+    ]
+  }
+}

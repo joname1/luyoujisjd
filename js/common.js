@@ -30,6 +30,7 @@ Date.prototype.format = function(format) {
 /*特殊字符转换*/
 function textdecode1(str) {
 	str = str.replace(/&amp;/gi, '&');
+	str = str.replace(/&amp;/gi, '&');
 	str = str.replace(/&lt;/gi, '<');
 	str = str.replace(/&gt;/gi, '>');
 	str = str.replace(/&nbsp;/gi, ' ');
@@ -37,5 +38,18 @@ function textdecode1(str) {
 	str = str.replace(/<brbr>/gi, '<br />');
 	str = str.replace(/"/g, "''");
 	str = str.replace(/'/g, '"');
+	return str;
+}
+/*特殊字符转换*/
+function textdecode2(str) {
+	str = str.replace(/&amp;/gi, '&');
+	str = str.replace(/&amp;/gi, '&');
+	str = str.replace(/&lt;/gi, '<');
+	str = str.replace(/&gt;/gi, '>');
+	str = str.replace(/&nbsp;/gi, ' ');
+	str = str.replace(/''/gi, '"');
+	str = str.replace(/<brbr>/gi, '<br />');
+//	str = str.replace(/"/g, "''");
+//	str = str.replace(/'/g, '"');
 	return str;
 }

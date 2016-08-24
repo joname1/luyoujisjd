@@ -11,10 +11,9 @@
 		<link href="css/style.css" rel="stylesheet" />
 		<link rel="stylesheet" href="css/iconfont.css">
 		<link rel="stylesheet" href="css/common.css">
-		<link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
-		<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ylg8yBCSUPFnuu82sDnIbZ5H"></script>
+		<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=726ZqpsoTe2765d1KaY5kqkd"></script>-->
 		<script type="text/javascript" src="js/request_url.js"></script>
 		<style>
 			html,
@@ -93,15 +92,10 @@
 			#order_div_2>div>botton,#order_div_3>div>botton,#order_div_4>div>botton{line-height: 40px; padding: 6px 20px; background: #FF0066; color: #fff;border-radius: 5px; }			
 			#order_div_2>div>img{ width: 28px;margin-left: 15px;}
 			#order_div_2>div,#order_div_3>div,#order_div_4>div{width:100%; text-align: center; line-height: 46px;}
-			.pick{
-				text-align: center;
-				margin-top: 200px;
-				}
-			.ad{
-				margin-top: 180px;
-			}
+				
 		</style>
 	</head>
+
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a id="person_center" class="mui-icon mui-pull-left my-bar-nav">
@@ -117,39 +111,13 @@
 			</h1>
 		</header>
 
-		<!-- PICK START -->
-		<div class="pick" id="order_div_1">
-			<a class="mui-tab-item" id="date_car">
-				<img src="img/btns.png" style="height:110px;width:110px;">
-			</a>
-		</div>
-
-		<!-- AD BANNER -->
-	<div class="ad mui-slider">
-	  <div class="mui-slider-group mui-slider-loop">
-	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
-	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
-	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
-	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
- 	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
-	  </div>
-	</div>
-
-	<!-- COPYRIGHT -->
-		<div class="cpr" style="text-align:center;margin-top:30px;">
-			<h5>Copyright <i class="fa fa-copyright"></i> 2016 易伙三商科技有限公司</h5>
-		</div>
-			<!-- <nav class="mui-bar-tab bar_transparent" id="order_div_1">
+		<div class="mui-content">
+			<nav class="mui-bar-tab bar_transparent" id="order_div_1">
 				<a class="mui-tab-item" id="date_car">
 					<span class="mui-icon iconfont icon-yuyue"></span>
 					<span class="mui-tab-label">抢单</span>
 				</a>
-			</nav> -->
+			</nav>
 			<nav class="mui-bar-tab bar_transparent" id="order_div_2">
 				
 				<div>正在前往<img align="absmiddle" id="user_tel" src="img/telephone_icon@2x_09.png"></div>			
@@ -170,20 +138,20 @@
 				<div class="hidden">共行驶<span id="g_away">0</span>公里，等待支付<span id="g_fee">0</span>元</div>	
 				<div>请选择支付方式</div>
 				<div>
-					<botton id="confirm_pay">司机代付</botton>
-					<botton id="confirm_pay1">收货方支付</botton>
-					<botton id="confirm_pay2">发货方支付</botton>
+					<botton id="confirm_pay">余额支付</botton>
+					<botton id="confirm_pay1">二维码支付</botton>
+					<botton id="confirm_pay2">用户支付</botton>
 				</div>
 			</nav>		
-			<!--<div id="map">地图加载中...</div>
-			<div align="center" id="map_result_div">
+			<div id="map">地图加载中...</div>
+			<!--<div align="center" id="map_result_div">
 				<div id="map_result">正在获取地址...</div>
 			</div>-->
 		</div>
 		<!--<div id="map_result_img" style="position: absolute;bottom: 50px;">
 			<img src="img/markers.png" style="width: 20px;height: 30px;" />
 		</div>-->
-		<div id="back_current_position" style="position: absolute;bottom: 100px;display:none;">
+		<div id="back_current_position" style="position: absolute;bottom: 100px;">
 			<img src="img/iconfont-wujiaoxing.png" width="40px" />
 		</div>
 		</div>
@@ -210,7 +178,9 @@
 					<!--<a id="qr-close" class=""><span class="mui-icon mui-icon-close-filled"></span></a>-->
 				
 		</div>
+
 	</body>
+
 	<script>
 	console.log('ddd');
 		var menu = null,
@@ -1160,10 +1130,5 @@
 //							});
 		});
 	</script>
-		<script>
-			var gallery = mui('.mui-slider');
-			gallery.slider({
-			  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
-			});
-		</script>
+
 </html>

@@ -456,7 +456,9 @@
 					"orderdistance.html",
 					"usercenter/pop_link.html"
 				],
-				"refer": [],
+				"refer": [
+					"login/login.html"
+				],
 				"priority": 0
 			},
 			"navigate/longdriver.html": {

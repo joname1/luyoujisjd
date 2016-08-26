@@ -20,14 +20,16 @@
     "refer": [
       "login/login.html",
       "setting_menu.html",
-      "usercenter/graborder_list.html"
+      "usercenter/graborder_list.html",
+      "qiangdan.html"
     ]
   },
   "login/login.html": {
     "resources": [
       "js/request_url.js",
       "js/mui.min.js",
-      "css/mui.min.css"
+      "css/mui.min.css",
+      "login/reg.html"
     ],
     "refer": []
   },
@@ -51,7 +53,8 @@
       "css/mui.min.css"
     ],
     "refer": [
-      "usercenter/recharge.html"
+      "usercenter/recharge.html",
+      "login/login.html"
     ]
   },
   "usercenter/recharge.html": {
@@ -137,7 +140,9 @@
       "fonts/mui.ttf",
       "css/mui.min.css"
     ],
-    "refer": []
+    "refer": [
+      "usercenter/graborder.html"
+    ]
   },
   "usercenter/withdraw.html": {
     "resources": [
@@ -154,6 +159,27 @@
     ],
     "refer": [
       "usercenter/purse.html"
+    ]
+  },
+  "qiangdan.html": {
+    "resources": [
+      "js/common.js",
+      "css/styles.css"
+    ],
+    "refer": []
+  },
+  "usercenter/graborder.html": {
+    "resources": [
+      "js/common.js"
+    ],
+    "refer": []
+  },
+  "login/reg.html": {
+    "resources": [
+      "login/login.html"
+    ],
+    "refer": [
+      "login/login.html"
     ]
   }
 }

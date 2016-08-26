@@ -143,7 +143,7 @@
 							
 						});						
 					}
-					
+				//	plus.storage.setItem('invite_code','123');
 					var regButton = doc.getElementById('reg');	
 					var coach_card_pic1 = doc.getElementById('coach_card_pic1');	
 					var coach_card_pic2 = doc.getElementById('coach_card_pic2');	
@@ -164,7 +164,7 @@
 		                        "province":plus.storage.getItem('province'),			                      
 		                        "city":plus.storage.getItem('city'),			                      
 		                        "district":plus.storage.getItem('district'),			                      
-		                        "coach_incode":plus.storage.getItem('coach_incode'),		                        
+		                        "invite_code":plus.storage.getItem('invite_code'),		                        
 		                        "coach_car_number":plus.storage.getItem('coach_car_number'),
 		                        "coach_car_type":plus.storage.getItem('coach_car_type'),
 		                        "coach_name":plus.storage.getItem('coach_name'),
@@ -192,9 +192,20 @@
 									mui.toast("手机号为空！");
 								} else if (-100 == response.result) {
 									mui.toast("手机号已注册！");
-								} else if (100 == response.result){							
-									mui.toast("注册成功，请等待系统审核！");												
-									location.href="login.html";
+								} else if (100 == response.result){		
+									var isserverlog = plus.storage.getItem('isServerlogin');
+									alert(isserverlog);
+									if ((isserverlog == 1) || (isserverlog == "1")) {
+										mui.toast("修改资料成功，请等待系统审核！");
+										mui.openWindow({
+											id: "index",
+											url: "../index.html"
+										});
+									}else{
+										alert("注册成功，请等待系统审核！");												
+										location.href="login.html";
+									}
+									
 								}
 							}, 
 							error: function(xhr, type, errorThrown) {

@@ -281,7 +281,8 @@
 					"img/peple.png",
 					"img/pick.jpg",
 					"img/btn.png",
-					"img/btns.png"
+					"img/btns.png",
+					null
 				],
 				"refer": [
 					"login/login.html",
@@ -293,7 +294,9 @@
 					"choose_endposition.html",
 					"usercenter/ordermanager.html",
 					"usercenter/ordermanager_detail.html",
-					"usercenter/graborder_list.html"
+					"usercenter/graborder_list.html",
+					"login/reg.html",
+					"login/reg_info.html"
 				],
 				"priority": 0
 			},
@@ -340,7 +343,8 @@
 					"login/reg.html"
 				],
 				"refer": [
-					"login/license.html"
+					"login/license.html",
+					"index.html"
 				],
 				"priority": 0
 			},

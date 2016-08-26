@@ -11,15 +11,16 @@
 		<link href="css/style.css" rel="stylesheet" />
 		<link rel="stylesheet" href="css/iconfont.css">
 		<link rel="stylesheet" href="css/common.css">
+		<link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+		<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ylg8yBCSUPFnuu82sDnIbZ5H"></script>
-		<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=726ZqpsoTe2765d1KaY5kqkd"></script>-->
 		<script type="text/javascript" src="js/request_url.js"></script>
 		<style>
 			html,
 			body {
 				width: 100%;
-				height: 100%;
+				/*height: 100%;*/
 			}
 			
 			.mui-bar-tab .mui-tab-item {
@@ -61,7 +62,7 @@
 				max-width: 90%;
 				line-height: 25px;
 				text-align: center;
-				margin: 0 auto; 
+				margin: 0 auto;
 				top: 35%;
 				left: 10%;
 				border: 1px solid #ccc;
@@ -92,10 +93,16 @@
 			#order_div_2>div>botton,#order_div_3>div>botton,#order_div_4>div>botton{line-height: 40px; padding: 6px 20px; background: #FF0066; color: #fff;border-radius: 5px; }			
 			#order_div_2>div>img{ width: 28px;margin-left: 15px;}
 			#order_div_2>div,#order_div_3>div,#order_div_4>div{width:100%; text-align: center; line-height: 46px;}
-				
+			.pick{
+				text-align: center;
+				/*margin-top: 200px;*/
+				}
+			.ad{
+				/*margin-top: 180px;*/
+				border-top:1px dashed #ccc;padding-top: 5px!important;
+			}
 		</style>
 	</head>
-
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a id="person_center" class="mui-icon mui-pull-left my-bar-nav">
@@ -110,27 +117,76 @@
 			   <span>路邮寄·司机端</span>	
 			</h1>
 		</header>
+			<!-- AD BANNER -->
+	<div class="ad mui-slider" style="margin-top: 50px;">
+	  <div class="mui-slider-group mui-slider-loop">
+	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+ 	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	  </div>
+	</div>	
 
-		<div class="mui-content">
-			<nav class="mui-bar-tab bar_transparent" id="order_div_1">
+		<!-- AD BANNER -->
+	<div class="ad mui-slider" style="">
+	  <div class="mui-slider-group mui-slider-loop">
+	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+ 	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	  </div>
+	</div>
+
+	<!-- COPYRIGHT -->
+		<div class="cpr" style="text-align:center;margin-top:30px;position: fixed;bottom: 0;width: 100%;">
+			<!-- PICK START -->
+		<div class="pick" id="order_div_1"style="display: block!important">
+			<a class="mui-tab-item" id="date_car">
+				<img src="img/btns.png" style="height:110px;width:110px;">
+			</a>
+		</div>
+			<h5>Copyright <i class="fa fa-copyright"></i> 2016 易伙三商科技有限公司</h5>
+		</div>
+			<!-- <nav class="mui-bar-tab bar_transparent" id="order_div_1">
 				<a class="mui-tab-item" id="date_car">
 					<span class="mui-icon iconfont icon-yuyue"></span>
 					<span class="mui-tab-label">抢单</span>
 				</a>
-			</nav>
-			<nav class="mui-bar-tab bar_transparent" id="order_div_2">
+			</nav> -->
+			<style type="text/css">
+				.mui-bar-tab{height: 150px;}
+			</style>
+			<nav class="mui-bar-tab bar_transparent" id="order_div_2"  >
 				
 				<div>正在前往<img align="absmiddle" id="user_tel" src="img/telephone_icon@2x_09.png"></div>			
 				<div>
 					<botton id="up_car">已收货</botton>
 				</div>
-			</nav>
+			</nav> 
 			<nav class="mui-bar-tab bar_transparent" id="order_div_3">
-				<div>已行驶<span id="al_away">0</span>公里，<span id="al_fee">0</span>元</div>	
+				 <!--style="display: block!important"-->
+				<div>
+					已行驶<span id="al_away">0</span>公里，<span id="al_fee">0</span>元  
+					<br />
+					<botton id="user_tel2"><img align="absmiddle" src="img/telephone_icon@2x_09.png" width="24px">发货人</botton>
+					<botton id="user_tel3"><img align="absmiddle" src="img/telephone_icon@2x_09.png" width="24px">收货人</botton>
+				</div>	
 				<div>
 					<botton id="go_to">已送达</botton>
 				</div>
-			</nav>
+			</nav> 
 			<style type="text/css">
 				.hidden{height: 1px;overflow: hidden;}
 			</style>
@@ -138,27 +194,26 @@
 				<div class="hidden">共行驶<span id="g_away">0</span>公里，等待支付<span id="g_fee">0</span>元</div>	
 				<div>请选择支付方式</div>
 				<div>
-					<botton id="confirm_pay">余额支付</botton>
-					<botton id="confirm_pay1">二维码支付</botton>
-					<botton id="confirm_pay2">用户支付</botton>
+					<botton id="confirm_pay">司机代付</botton>
+					<botton id="confirm_pay1">收货方支付</botton>
+					<botton id="confirm_pay2">发货方支付</botton>
 				</div>
 			</nav>		
-			<div id="map">地图加载中...</div>
-			<!--<div align="center" id="map_result_div">
+			<!--<div id="map">地图加载中...</div>
+			<div align="center" id="map_result_div">
 				<div id="map_result">正在获取地址...</div>
 			</div>-->
 		</div>
 		<!--<div id="map_result_img" style="position: absolute;bottom: 50px;">
 			<img src="img/markers.png" style="width: 20px;height: 30px;" />
 		</div>-->
-		<div id="back_current_position" style="position: absolute;bottom: 100px;">
+		<div id="back_current_position" style="position: absolute;bottom: 100px;display:none;">
 			<img src="img/iconfont-wujiaoxing.png" width="40px" />
 		</div>
 		</div>
-
 		<!-- 弹出框广告信息-->
 			<style>
-						#qrpay{    border: solid 1px #bbb;
+				#qrpay{    border: solid 1px #bbb;
     border-radius: 5px;
     margin: 50px auto;
     width:300px;
@@ -166,7 +221,7 @@
     text-align: center;
     background-color: #fff;}
     #qr-close{margin: auto;font-size:60px;color: #666;}
-					</style>
+		</style>
 		<div id="pop_div" class="bar_transparent" style="width: 100%;height: 100%;display:none;text-align: center;">
 					<div id="qrpay">
 						<iframe frameborder="0" id="qrurl" style="height: 300px;"></iframe>
@@ -178,11 +233,8 @@
 					<!--<a id="qr-close" class=""><span class="mui-icon mui-icon-close-filled"></span></a>-->
 				
 		</div>
-
 	</body>
-
 	<script>
-	console.log('ddd');
 		var menu = null,
 			main = null;
 		var showMenu = false;
@@ -232,7 +284,6 @@
 			}
 		};
 	</script> 
-
 	<script type="text/javascript">
 		var coachLatPosArr = "";
 		var coachLongtPosArr = "";
@@ -247,6 +298,7 @@
 		var strParam = "";
 		var preMarker = new Array();	
 		var up_car_point=null;		
+		
 		mui.plusReady(function() {			
 			if(parseFloat(plus.storage.getItem('isServerlogin') || 0)!=1)
 			{
@@ -255,7 +307,7 @@
 					url: "login/login.html"
 				});
 			}
-			//检查更新	
+			//检查更新	 
 			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {					
 				mui.ajax(request_url + "get_update", {	
 					data: {
@@ -296,7 +348,7 @@
 			function getPosition() {
 				var mPoint = map.getCenter();
 				var lat = mPoint.lat; //获取到当前位置的纬度；			
-				var longt = mPoint.lng; //获取到当前位置的经度
+				var longt = mPoint.lng; //获取到当前位置的经度 
 				var url = "http://api.map.baidu.com/geocoder/v2/?ak=FC9c13967bf240823ed03d702d883e83&location=" + lat + "," + longt + "&output=json&pois=1"
 				mui.getJSON(url, function(rsp) {
 					if (rsp != null) {
@@ -353,7 +405,7 @@
 			plus.storage.setItem("clientid", info.clientid);
 			plus.storage.setItem("appid", info.appid);
 			plus.storage.setItem("appkey", info.appkey);
-			plus.storage.setItem("token", info.token);  
+			plus.storage.setItem("token", info.token);
 			plus.push.addEventListener("click", function(msg) {
 				// 判断是从本地创建还是离线推送的消息
 				switch (msg.payload) {
@@ -418,6 +470,13 @@
 			document.getElementById("user_tel").addEventListener("tap", function() {
 				var user_tel=document.getElementById("user_tel").getAttribute("user_tel");
 				plus.device.dial(user_tel, true);
+			document.getElementById("user_tel2").addEventListener("tap", function() {
+				var user_tel=document.getElementById("user_tel").getAttribute("user_tel");
+				plus.device.dial(user_tel, true);
+			document.getElementById("user_tel3").addEventListener("tap", function() {
+				var receive_tel=document.getElementById("user_tel").getAttribute("receive_tel");
+				alert(receive_tel);
+				plus.device.dial(receive_tel, true);
 			});
 			//用户上车
 			document.getElementById("up_car").addEventListener("tap", function() {				
@@ -614,10 +673,6 @@
 			
 		
 		function qiangdan(s){
-	
-		//	var s="{'Table':[{'RowIndex':'1','order_pk':'c82f11fb-0a7c-414d-bd77-8d737033e3fa','user_pk':'a31309c3-931d-4a9a-8f05-0280634aecb4','user_name':'','user_tel':'17792513817','user_sms':'0','order_type':'0','order_datetime':'2016-04-17','start_address':'沙井村','start_lon':'108.916313','start_lat':'34.227715','end_address':'牡丹园','end_lon':'108.895275','end_lat':'34.255498','order_away':'5.4','order_time':'18','coach_pk':'','car_meal_fee':'0.00','order_away_fee':'0.00','order_time_fee':'0.00','order_far_away_fee':'0.00','order_cut_fee':'0.00','order_fee':'0.00','order_rem':'','order_state':'0','create_time':'2016/4/17 14:20:19'}]}";
-  
-  // var s= '{"Table":[{"RowIndex":"1","order_pk":"a5709c4a-7ac4-45c2-8b99-e6961d7211d9","order_type":"2","user_tel":"15577729055","order_datetime":"2016-8-11&nbsp;17:28","start_address":"柳州市19路","start_lon":"109.419103","start_lat":"24.299448","end_address":"柳州市21路","end_lon":"109.411457","end_lat":"24.209085"}]}';
 
 			mui.openWindow({
 				id: "qiangdan",
@@ -628,8 +683,10 @@
 			});
 		}
 		function get_coach_order_info()
-		{
-//			setTimeout("get_coach_order_info()","2000");	
+		{	
+			
+//			get_clientorder_list();//获得最新订单
+			setTimeout("get_coach_order_info()","2000");	
 			var coach_pk = plus.storage.getItem('logincoach_pk');		
 			var url = request_url + "get_coach_order_info";
 			mui.ajax(url, {
@@ -641,6 +698,7 @@
 				timeout: 5000, //超时时间设置为10秒；
 				success: function(response) {	
 					 
+		//	console.log(response.Table[0].order_state);
 					if(response.Table.length>0)
 					{
 						if(response.Table[0].order_state=="1")
@@ -648,11 +706,12 @@
 							nav_info();
 							document.getElementById("order_div_2").style.display="block";						
 							document.getElementById("user_tel").setAttribute("user_tel",response.Table[0].user_tel);	
+							document.getElementById("user_tel").setAttribute("receive_tel",response.Table[0].receive_tel);	
 							document.getElementById("up_car").setAttribute("order_pk",response.Table[0].order_pk);							
 							go_start(response);
 						}
 						else if(response.Table[0].order_state=="2") 
-						{
+						{  
 							nav_info();
 							up_car_point=new BMap.Point(response.Table[0].start_lon,response.Table[0].start_lat);	
 							GetAwayAndTime();
@@ -671,9 +730,7 @@
 						}
 						else if(response.Table[0].order_state=="0")
 						{				
-							
-						    console.log('弹出抢单2');
-							qiangdan(response.Table[0]);//抢单	
+							qiangdan(response.Table[0]);//抢单 
 						}
 						else
 						{							
@@ -780,7 +837,9 @@
 		}
 		/*获取客户端提交的订单列表*/
 			var tan =0 ;
+			
 		function get_clientorder_list() {
+//			console.log('44');
 			coachLatPosArr = new Array();
 			coachLongtPosArr = new Array(); 
 			coachOrderPkArr = new Array();
@@ -810,7 +869,7 @@
 				type: 'post', //HTTP请求类型
 				timeout: 5000, //超时时间设置为5秒；
 				success: function(rsp) {
-					
+//					console.log('sss'+rsp.Table.length);
 					if (preMarker.length > 0) {
 						for (var i = 0; i < preMarker.length; i++) {
 							map.removeOverlay(preMarker[i]);
@@ -820,12 +879,10 @@
 					for (var i = 0; i < rsp.Table.length; i++) {
 						
 					var s = '{"Table":['+JSON.stringify(rsp.Table[i])+']}';
-					console.log(rsp.Table[i].orderid+" 最新订单ID:"+tan + " 未接订单:"+ rsp.Table.length);
-					if(tan < rsp.Table[i].orderid ){ // <
-						//弹出抢单
-						console.log('弹出抢单');
+					console.log(rsp.Table[0].orderid+" 最新订单ID:"+tan + " 未接订单:"+ rsp.Table.length);
+					if(tan < rsp.Table[i].orderid ){
 						plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
-						qiangdan(s);//抢单
+						qiangdan(s);//抢单 
 					}
 					
 						coachLatPosArr[i] = rsp.Table[i].start_lat;
@@ -1088,34 +1145,9 @@
 			getPosBaidu();
 		});
 		var date_car = document.getElementById("date_car");
-		
 		date_car.addEventListener("tap", function() {
-			
 			isserverlog = plus.storage.getItem('isServerlogin');
-			var state = plus.storage.getItem("coach_state"); 
 			isserverlog = 1;//测试用
-			
-			if(state =="0"){
-					plus.nativeUI.confirm("您的资料尚审核中，无法接单！\n‘取消’等待审核  ‘确定’修改资料", function(e) {
-				if (e.index == 0) { 
-					mui.openWindow({
-								id: "reg",
-								url: "login/reg_info.html"
-							});
-				}
-				})
-				return false;
-			}else if(state =="" || state == null){
-				plus.nativeUI.confirm("请先完善个人资料！", function(e) {
-				if (e.index == 0) { 
-					mui.openWindow({
-								id: "reg",
-								url: "login/reg_info.html"
-							});
-				}
-				})
-				return false;
-			} 
 			/*判空操作*/
 			if (isserverlog == null) {
 				plus.storage.setItem('isServerlogin', 0);
@@ -1151,7 +1183,7 @@
 				});						
 			}
 //							mui.openWindow({
-//								id: "qiangdan",
+//								id:user_tel "qiangdan",
 //								url: "qiangdan.html",
 //								extras: {
 //									param: "{'Table':[{'RowIndex':'1','order_pk':'b6781b93-9f6a-499c-aa8e-9113a489d651','user_pk':'a31309c3-931d-4a9a-8f05-0280634aecb4','user_name':'小雪','user_tel':'17792513817','user_sms':'0','order_type':'1','order_datetime':'2015-12-18&nbsp;1:24','start_address':'雁塔区太白南路中国移动3G手机销售中心北52米','start_lon':'34.209048','start_lat':'108.907845','end_address':'雁塔区南三环江林公园里东南181米','end_lon':'34.197255','end_lat':'108.914436','order_away':'2.3','order_time':'7','coach_pk':'','car_meal_fee':'0.00','order_away_fee':'0.00','order_time_fee':'0.00','order_far_away_fee':'0.00','order_cut_fee':'0.00','order_fee':'0.00','order_rem':'undefined','order_state':'0','create_time':'2015/12/18&nbsp;1:24:33'}]}"
@@ -1159,5 +1191,10 @@
 //							});
 		});
 	</script>
-
+		<script>
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+			  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+			});
+		</script>
 </html>

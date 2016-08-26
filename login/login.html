@@ -73,11 +73,12 @@
 				<button id='login' class="mui-btn login" style="width:50%;">登	录</button>
 			</div>
 			<div class="mui-content-padded" align="center" style=" padding-top: 20px; ">				
-				<div class="link-area" >还没有账号？<a href='reg.html' style=" font-size: 14px;">立即注册</a> <!--<span class="spliter">&nbsp;|&nbsp;</span> <a href='forgetPassword.html' style=" font-size: 14px;">忘记密码</a>-->
+				<div class="link-area" >还没有账号？<a href='reg.html' style=" font-size: 14px;">立即注册</a>
+					<!--<span class="spliter">&nbsp;|&nbsp;</span> <a href='forgetPassword.html' style=" font-size: 14px;">忘记密码</a>-->
 				</div>
 			</div>
 		</div>
-	</body>
+	</body> 
 	<script type="text/javascript" charset="utf-8">
 		var return_result = "";
 		mui.init();
@@ -113,19 +114,25 @@
 							mui.toast("手机号不能为空！");
 						} else if (-100 == response.result) {
 							mui.toast("手机号未注册或正在审核中！");
-						} else {
+						}  else {
 							mui.toast("登录成功！");						
 							console.log(JSON.stringify(response));
 							plus.storage.setItem('isServerlogin', "1");
-							plus.storage.setItem("logincoach_pk", response.Table[0].coach_pk + "");
+							plus.storage.setItem("logincoach_pk", response.Table[0].coach_pk + "");  
 							plus.storage.setItem('coach_name', response.Table[0].coach_name);
 							plus.storage.setItem('coach_phone', response.Table[0].coach_phone);
 							plus.storage.setItem('coach_pic', response.Table[0].coach_pic);
 							plus.storage.setItem('coach_order_range', response.Table[0].coach_order_range);
 							plus.storage.setItem('coach_code', response.Table[0].coach_code);
+							plus.storage.setItem('coach_state', response.Table[0].coach_state);
+							plus.storage.setItem('input_yqcode', response.Table[0].invite_code);
 							plus.webview.currentWebview().hide();
 							input_ckcode.value = "";
 							document.getElementById("input_phonenum").value = "";
+							mui.openWindow({
+								id: "index",
+								url: "../index.html"
+							});
 						}
 					},
 					error: function(xhr, type, errorThrown) {

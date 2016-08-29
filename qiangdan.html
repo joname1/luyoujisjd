@@ -32,58 +32,51 @@
 				var order_pk = strParamStr.Table[0].order_pk;
 				qiangdan.addEventListener("tap", function() {
 					
-					var url = request_url + "coach_and_order";
-					mui.ajax(url, {
-						data: {
-							"coach_pk": coach_pk,
-							"order_pk": order_pk
-						},
-						dataType: 'json', //服务器返回json格式数据
-						type: 'post', //HTTP请求类型
-						timeout: 5000, //超时时间设置为5秒；
-						success: function(response) {							
-							if(parseInt(response.result)==100 || parseInt(response.result)==-100)
-							{								
-								mui.toast("抢单成功!");
-								mui.fire(plus.webview.getLaunchWebview(),'qiangdan_order',strParamStr);
-								mui.back();
-								mui.openWindow({
-									id: "daohang",
-									url: "daohang.html",
-									extras: {
-										end_lon: strParamStr.Table[0].end_lon,
-										end_lat: strParamStr.Table[0].end_lat,
-										end_address: strParamStr.Table[0].end_address,
-										coach_phone: strParamStr.Table[0].user_tel
-									}
-								});
-							}
-							else if(parseInt(response.result)==-100)
-							{
-							 	mui.toast("您有未完成订单，暂不能抢单!");
-								setTimeout("closeWindows()", 1000);
-							}
-							else if(parseInt(response.result)==-98)
-							{
-							 	mui.toast("抢单失败，车型不符!");
-								setTimeout("closeWindows()", 1000);
-							}
-							else if(parseInt(response.result)==-96)
-							{
-							 	mui.toast("账户余额不足，请充值!");		
-							 	var allPage = plus.webview.all();  
-							    for (var i = 0; i < allPage.length; i++){
-							      if(plus.webview.getLaunchWebview()!=allPage[i])
-							        plus.webview.close(allPage[i]);       
-							    }		
-							}
-							
-						},
-						error: function(xhr, type, errorThrown) {
-							//异常处理；
-							console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
-						}
-					});
+					var url = request_url+"coach_and_order"; 
+      			mui.ajax(url,{
+				data:{     
+					       "coach_pk"    : coach_pk,
+						   "order_pk"    : order_pk
+				     },
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:5000,//超时时间设置为5秒；
+				success:function(response){
+					console.log(JSON.stringify(response));
+					if(parseInt(response.result)==100 || parseInt(response.result)==-100)
+					{						
+						mui.toast("抢单成功!");
+						mui.fire(plus.webview.getLaunchWebview(),'qiangdan_order',response);						
+						var allPage = plus.webview.all();  
+					    for (var i = 0; i < allPage.length; i++){
+					      if(plus.webview.getLaunchWebview()!=allPage[i])
+					        plus.webview.close(allPage[i]);       
+					    }					
+					}
+					else if(parseInt(response.result)==-100)
+					{
+						mui.toast("您有未完成订单，暂不能抢单!");						
+					}
+					else if(parseInt(response.result)==-98)
+					{
+					 	mui.toast("抢单失败，车型不符!");		
+					 	mui.back();
+					}
+					else if(parseInt(response.result)==-96)
+					{
+					 	mui.toast("账户余额不足，请充值!");		
+					 	var allPage = plus.webview.all();  
+					    for (var i = 0; i < allPage.length; i++){
+					      if(plus.webview.getLaunchWebview()!=allPage[i])
+					        plus.webview.close(allPage[i]);       
+					    }		
+					}
+				},
+				error:function(xhr,type,errorThrown){
+					//异常处理；
+					console.log("\n失败$$$$$"+xhr.status+"$$$"+type+"$$$"+errorThrown);
+				}
+			});
 				})
 //				quanbu.addEventListener("click", function() {
 //					mui.openWindow({
@@ -153,7 +146,10 @@
 				</div>
 				<div class="mui-input-row" style="padding: 0 10px; border-top: solid 1px #ccc;"></div>
 				<div class="mui-row div_padding" style=" margin-top: 10%;">
-					<div class="mui-col mui-col-xs-6" style="float: none; margin: 0 auto;"><span id="qiangdan" style="font-size: 20px;height:80px;line-height: 80px;width:80px; border-radius: 80px; display: inline-block;margin: -20% 5% 0 5%;">抢单</span></div>
+					<div class="mui-col mui-col-xs-6" style="float: none; margin: 0 auto;"><span id="qiangdan" style="font-size: 20px;height:80px;line-height: 80px;width:80px; border-radius: 80px; display: inline-block;margin: -20% 5% 0 5%;">抢单</span>
+						
+						
+					</div>
 					
 				</div>
 			</div>

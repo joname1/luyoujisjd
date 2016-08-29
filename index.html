@@ -93,7 +93,7 @@
 			#order_div_2>div>botton,#order_div_3>div>botton,#order_div_4>div>botton{line-height: 40px; padding: 6px 20px; background: #FF0066; color: #fff;border-radius: 5px; }			
 			#order_div_2>div>img{ width: 28px;margin-left: 15px;}
 			#order_div_2>div,#order_div_3>div,#order_div_4>div{width:100%; text-align: center; line-height: 46px;}
-				
+				.mui-bar-tab{height: 150px;}
 		</style>
 	</head>
 
@@ -190,10 +190,10 @@
 					<botton id="confirm_pay2">发货方支付</botton>
 				</div>
 			</nav>		
-			<div id="map" style="display: none;">地图加载中...</div>
-			<!--<div align="center" id="map_result_div">
-				<div id="map_result">正在获取地址...</div>
-			</div>-->
+			<div id="map" style="display: ;">地图加载中...</div>
+			<div align="center" id="map_result_div">
+				<!--<div id="map_result">正在获取地址...</div>-->
+			</div>
 		</div>
 		<!--<div id="map_result_img" style="position: absolute;bottom: 50px;">
 			<img src="img/markers.png" style="width: 20px;height: 30px;" />
@@ -700,6 +700,7 @@
 						if(response.Table[0].order_state=="1")
 						{
 							nav_info();
+							document.getElementById("map").style.display="block";	
 							document.getElementById("order_div_2").style.display="block";						
 							document.getElementById("user_tel").setAttribute("user_tel",response.Table[0].user_tel);	
 							document.getElementById("user_tel").setAttribute("receive_tel",response.Table[0].receive_tel);	
@@ -729,7 +730,9 @@
 							qiangdan(response.Table[0]);//抢单 
 						}
 						else
-						{							
+						{			
+							
+							document.getElementById("map").style.display="none";	
 							map.clearOverlays();
 							map.addOverlay(marker); //增加点
 							nav_info();
@@ -874,13 +877,13 @@
 						
 					var s = '{"Table":['+JSON.stringify(rsp.Table[i])+']}';
 					console.log(rsp.Table[i].orderid+" 最新订单ID:"+tan + " 未接订单:"+ rsp.Table.length);
-					if(tan < rsp.Table[i].orderid ){ // <
+					if(tan < rsp.Table[i].orderid ){ // < 	
+					 
 						//弹出抢单
 						console.log('弹出抢单');
 						plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
 						qiangdan(s);//抢单
-					}
-					
+			} 
 						coachLatPosArr[i] = rsp.Table[i].start_lat;
 						coachLongtPosArr[i] = rsp.Table[i].start_lon;
 						coachOrderPkArr[i] = rsp.Table[i].order_pk;

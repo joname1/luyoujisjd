@@ -152,11 +152,11 @@
 	<!-- COPYRIGHT -->
 		<div class="cpr" style="text-align:center;margin-top:30px;position: fixed;bottom: 0;width: 100%;">
 			<!-- PICK START -->
-		<div class="pick" id="order_div_1"style="display: block!important">
+		<nav class="pick" id="order_div_1"style="display: block!important">
 			<a class="mui-tab-item" id="date_car">
 				<img src="img/btns.png" style="height:110px;width:110px;">
 			</a>
-		</div>
+		</nav>
 			<h5>Copyright <i class="fa fa-copyright"></i> 2016 易伙三商科技有限公司</h5>
 		</div>
 			<!-- <nav class="mui-bar-tab bar_transparent" id="order_div_1">
@@ -225,7 +225,6 @@
 		<div id="pop_div" class="bar_transparent" style="width: 100%;height: 100%;display:none;text-align: center;">
 					<div id="qrpay">
 						<iframe frameborder="0" id="qrurl" style="height: 300px;"></iframe>
-						
 					</div>
 					请收货方微信扫描上方二维码支付
 					<br /><br />
@@ -698,7 +697,6 @@
 				timeout: 5000, //超时时间设置为10秒；
 				success: function(response) {	
 					 
-		//	console.log(response.Table[0].order_state);
 					if(response.Table.length>0)
 					{
 						if(response.Table[0].order_state=="1")
@@ -839,7 +837,6 @@
 			var tan =0 ;
 			
 		function get_clientorder_list() {
-//			console.log('44');
 			coachLatPosArr = new Array();
 			coachLongtPosArr = new Array(); 
 			coachOrderPkArr = new Array();
@@ -869,7 +866,7 @@
 				type: 'post', //HTTP请求类型
 				timeout: 5000, //超时时间设置为5秒；
 				success: function(rsp) {
-//					console.log('sss'+rsp.Table.length);
+					
 					if (preMarker.length > 0) {
 						for (var i = 0; i < preMarker.length; i++) {
 							map.removeOverlay(preMarker[i]);

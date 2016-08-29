@@ -20,6 +20,7 @@
 			body {
 				width: 100%;
 				height: 100%;
+				background: #fff;
 			}
 			
 			.mui-bar-tab .mui-tab-item {
@@ -111,12 +112,51 @@
 			</h1>
 		</header>
 
-		<div class="mui-content">
-			<nav class="mui-bar-tab bar_transparent" id="order_div_1">
-				<a class="mui-tab-item" id="date_car">
+
+	<!-- AD BANNER -->
+	<div class="ad mui-slider" style="margin-top: 50px;">
+	  <div class="mui-slider-group mui-slider-loop">
+	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+ 	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	  </div>
+	</div>	
+
+		<!-- AD BANNER -->
+	<div class="ad mui-slider" style="">
+	  <div class="mui-slider-group mui-slider-loop">
+	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    	<div class="mui-slider-item">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+ 	    	<div class="mui-slider-item mui-slider-item-duplicate">
+	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	  </div>
+	</div>
+	
+		<div class="mui-content" style="background:#fff!important">
+			<nav class="mui-bar-tab bar_transparent" id="order_div_1" style="height:160px;text-align:center;background:#fff!important">
+				<!--<a class="mui-tab-item" id="date_car">
 					<span class="mui-icon iconfont icon-yuyue"></span>
 					<span class="mui-tab-label">抢单</span>
-				</a>
+				</a>-->
+			<a class="mui-tab-item" id="date_car">
+				<img src="img/btns.png" style="height:110px;width:110px;">
+			</a>
+			
+			<h5>Copyright <i class="fa fa-copyright"></i> 2016 易伙三商科技有限公司</h5>
+		</nav>
 			</nav>
 			<nav class="mui-bar-tab bar_transparent" id="order_div_2">
 				
@@ -126,7 +166,14 @@
 				</div>
 			</nav>
 			<nav class="mui-bar-tab bar_transparent" id="order_div_3">
-				<div>已行驶<span id="al_away">0</span>公里，<span id="al_fee">0</span>元</div>	
+				 <!--style="display: block!important"-->
+				<div>
+				送货中
+				<!--	已行驶<span id="al_away">0</span>公里，<span id="al_fee">0</span>元  -->
+					<br />
+					<botton id="user_tel2"><img align="absmiddle" src="img/telephone_icon@2x_09.png" width="24px">发货人</botton>
+					<botton id="user_tel3"><img align="absmiddle" src="img/telephone_icon@2x_09.png" width="24px">收货人</botton>
+				</div>	
 				<div>
 					<botton id="go_to">已送达</botton>
 				</div>
@@ -138,12 +185,12 @@
 				<div class="hidden">共行驶<span id="g_away">0</span>公里，等待支付<span id="g_fee">0</span>元</div>	
 				<div>请选择支付方式</div>
 				<div>
-					<botton id="confirm_pay">余额支付</botton>
-					<botton id="confirm_pay1">二维码支付</botton>
-					<botton id="confirm_pay2">用户支付</botton>
+					<botton id="confirm_pay">司机代付</botton>
+					<botton id="confirm_pay1">收货方支付</botton>
+					<botton id="confirm_pay2">发货方支付</botton>
 				</div>
 			</nav>		
-			<div id="map">地图加载中...</div>
+			<div id="map" style="display: none;">地图加载中...</div>
 			<!--<div align="center" id="map_result_div">
 				<div id="map_result">正在获取地址...</div>
 			</div>-->
@@ -151,7 +198,7 @@
 		<!--<div id="map_result_img" style="position: absolute;bottom: 50px;">
 			<img src="img/markers.png" style="width: 20px;height: 30px;" />
 		</div>-->
-		<div id="back_current_position" style="position: absolute;bottom: 100px;">
+		<div id="back_current_position" style="display: none;position: absolute;bottom: 100px;">
 			<img src="img/iconfont-wujiaoxing.png" width="40px" />
 		</div>
 		</div>
@@ -418,6 +465,15 @@
 			document.getElementById("user_tel").addEventListener("tap", function() {
 				var user_tel=document.getElementById("user_tel").getAttribute("user_tel");
 				plus.device.dial(user_tel, true);
+					});
+			document.getElementById("user_tel2").addEventListener("tap", function() {
+				var user_tel=document.getElementById("user_tel").getAttribute("user_tel");
+				plus.device.dial(user_tel, true);
+					});
+			document.getElementById("user_tel3").addEventListener("tap", function() {
+				var receive_tel=document.getElementById("user_tel").getAttribute("receive_tel");
+				alert(receive_tel);
+				plus.device.dial(receive_tel, true);
 			});
 			//用户上车
 			document.getElementById("up_car").addEventListener("tap", function() {				
@@ -614,10 +670,6 @@
 			
 		
 		function qiangdan(s){
-	
-		//	var s="{'Table':[{'RowIndex':'1','order_pk':'c82f11fb-0a7c-414d-bd77-8d737033e3fa','user_pk':'a31309c3-931d-4a9a-8f05-0280634aecb4','user_name':'','user_tel':'17792513817','user_sms':'0','order_type':'0','order_datetime':'2016-04-17','start_address':'沙井村','start_lon':'108.916313','start_lat':'34.227715','end_address':'牡丹园','end_lon':'108.895275','end_lat':'34.255498','order_away':'5.4','order_time':'18','coach_pk':'','car_meal_fee':'0.00','order_away_fee':'0.00','order_time_fee':'0.00','order_far_away_fee':'0.00','order_cut_fee':'0.00','order_fee':'0.00','order_rem':'','order_state':'0','create_time':'2016/4/17 14:20:19'}]}";
-  
-  // var s= '{"Table":[{"RowIndex":"1","order_pk":"a5709c4a-7ac4-45c2-8b99-e6961d7211d9","order_type":"2","user_tel":"15577729055","order_datetime":"2016-8-11&nbsp;17:28","start_address":"柳州市19路","start_lon":"109.419103","start_lat":"24.299448","end_address":"柳州市21路","end_lon":"109.411457","end_lat":"24.209085"}]}';
 
 			mui.openWindow({
 				id: "qiangdan",
@@ -628,8 +680,10 @@
 			});
 		}
 		function get_coach_order_info()
-		{
-//			setTimeout("get_coach_order_info()","2000");	
+		{	
+			
+//			get_clientorder_list();//获得最新订单
+			setTimeout("get_coach_order_info()","2000");	
 			var coach_pk = plus.storage.getItem('logincoach_pk');		
 			var url = request_url + "get_coach_order_info";
 			mui.ajax(url, {
@@ -648,6 +702,7 @@
 							nav_info();
 							document.getElementById("order_div_2").style.display="block";						
 							document.getElementById("user_tel").setAttribute("user_tel",response.Table[0].user_tel);	
+							document.getElementById("user_tel").setAttribute("receive_tel",response.Table[0].receive_tel);	
 							document.getElementById("up_car").setAttribute("order_pk",response.Table[0].order_pk);							
 							go_start(response);
 						}
@@ -671,9 +726,7 @@
 						}
 						else if(response.Table[0].order_state=="0")
 						{				
-							
-						    console.log('弹出抢单2');
-							qiangdan(response.Table[0]);//抢单	
+							qiangdan(response.Table[0]);//抢单 
 						}
 						else
 						{							

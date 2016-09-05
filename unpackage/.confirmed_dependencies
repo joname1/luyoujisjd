@@ -21,7 +21,8 @@
       "login/login.html",
       "setting_menu.html",
       "usercenter/graborder_list.html",
-      "qiangdan.html"
+      "qiangdan.html",
+      "usercenter/ordermanager.html"
     ]
   },
   "login/login.html": {
@@ -31,7 +32,9 @@
       "css/mui.min.css",
       "login/reg.html"
     ],
-    "refer": []
+    "refer": [
+      "index.html"
+    ]
   },
   "setting_menu.html": {
     "resources": [
@@ -59,7 +62,11 @@
   },
   "usercenter/recharge.html": {
     "resources": [
-      "setting_menu.html"
+      "setting_menu.html",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
     ],
     "refer": [
       "setting_menu.html"
@@ -82,7 +89,11 @@
   },
   "orderdistance.html": {
     "resources": [
-      "setting_menu.html"
+      "setting_menu.html",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
     ],
     "refer": [
       "setting_menu.html"
@@ -176,10 +187,24 @@
   },
   "login/reg.html": {
     "resources": [
-      "login/login.html"
+      "login/login.html",
+      "fonts/mui.ttf",
+      "js/request_url.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
     ],
     "refer": [
       "login/login.html"
     ]
+  },
+  "usercenter/ordermanager.html": {
+    "resources": [
+      "js/request_url.js",
+      "js/jquery-1.7.2.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
   }
 }

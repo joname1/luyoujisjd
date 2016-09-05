@@ -21,7 +21,7 @@ body {
 }
 .top_bg {
 	padding:10px;
-	background:#FF0066;
+	background:#de8d1a;
 	-moz-border-radius: 6px;      /* Gecko browsers */
 	-webkit-border-radius:  6px;   /* Webkit browsers */
 	border-radius: 6px;            /* W3C syntax */
@@ -60,7 +60,6 @@ body {
 	height: calc(100vw/4); 
 	line-height:calc(120vw/4);
 	text-align:center;
-	background:#FF0066;
 	color: #FFFFFF;
 	
 }

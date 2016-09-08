@@ -72,7 +72,7 @@
 				color: #666;
 				font-size: 12px;
 			}
-			
+			 
 			#map_result_img {
 				width: 80%;
 				height: 8%;
@@ -111,7 +111,7 @@
 			</h1>
 		</header>
 		
-	<!-- AD BANNER
+	<!-- AD BANNER-->
 	<div class="ad mui-slider" style="margin-top: 50px;">
 	  <div class="mui-slider-group mui-slider-loop">
 	    	<div class="mui-slider-item mui-slider-item-duplicate">
@@ -139,7 +139,7 @@
  	    	<div class="mui-slider-item mui-slider-item-duplicate">
 	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
 	  </div>
-	</div>-->
+	</div>
 	
 	<div class="mui-content" style="background:#fff!important">
 			<nav class="mui-bar-tab bar_transparent" id="order_div_1" style="height:160px;text-align:center;background:#fff!important">
@@ -188,7 +188,7 @@
 					<botton id="confirm_pay2">发货方支付</botton>
 				</div>
 			</nav>		
-			<div id="map" style="display: ;">地图加载中...</div>
+			<div id="map" style="display: none;">地图加载中...</div> 
 			<div align="center" id="map_result_div">
 				<!--<div id="map_result">正在获取地址...</div>-->
 			</div>
@@ -212,7 +212,7 @@
     background-color: #fff;}
     #qr-close{margin: auto;font-size:60px;color: #666;}
 					</style>
-		<div id="pop_div" class="bar_transparent" style="width: 100%;height: 100%;display:none;text-align: center;">
+		<div id="pop_div" class="bar_transparent" style="width: 100%;height: 100%;display:none;text-align: center;top:0">
 					<div id="qrpay">
 						<iframe frameborder="0" id="qrurl" style="height: 300px;"></iframe>
 						
@@ -300,6 +300,13 @@
 					url: "login/login.html"
 				});
 			}
+			
+//			  // 设置APP图标的角标
+//  console.log('设置角标');
+//  plus.runtime.setBadgeNumber('5'); 
+
+
+
 			//检查更新	
 			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {					
 				mui.ajax(request_url + "get_update", {	
@@ -387,12 +394,11 @@
 //					pop_div.style.display = "none";
 //				} 
 			})
-			plus.push.setAutoNotification(true);
-			console.log('dddsss');
+			plus.push.setAutoNotification(false);
 			var info = plus.push.getClientInfo();
 			console.log("获取客户端推送标识信息：");
 			console.log("token: " + info.token);
-			console.log("clientid: " + info.clientid);
+			console.log("clientid: " + info.clientid); 
 			console.log("appid: " + info.appid);
 			console.log("appkey: " + info.appkey);
 			plus.storage.setItem("clientid", info.clientid);
@@ -415,20 +421,40 @@
 			// 监听在线消息事件
 			plus.push.addEventListener("receive", function(msg) {
 				if (msg.aps) { // Apple APNS message
-					//					mui.toast("接收到在线APNS消息：");
+										mui.toast("接收到在线APNS消息：");
+										console.log("接收到在线APNS消息：");
 				} else {
-					//					mui.toast("接收到在线透传消息：");
+										mui.toast("接收到在线透传消息：");
+										console.log("接收到在线透传消息：");
 				}
-				if(plus.storage.getItem("JIEDIAN")!="1")//接单模式关闭
+				if(plus.storage.getItem("JIEDIAN")!="1")//接单模式关闭  0为打开， 1为关闭
 				{
 					logoutPushMsg(msg);
-					console.log('11111');
+					console.log('111 接单模式');
 				}else{
-					console.log('11111');
+					logoutPushMsg(msg);  //原无
+					console.log('000 接单模式 关闭');
 				}
 			}, false);
 			
 			
+			/**
+ * 本地创建一条推动消息
+ */
+//function createLocalPushMsg(){
+//	var options = {cover:false};
+//	var str = dateToStr(new Date());
+//	str += ": 欢迎使用HTML5+创建本地消息！";
+//	alert('dd');
+//	plus.push.createMessage( str, "LocalMSG", options );
+//	console.log( "创建本地消息成功！" );
+//	console.log( "请到系统消息中心查看！" );
+//	if(plus.os.name=="iOS"){
+//		outLine('*如果无法创建消息，请到"设置"->"通知"中配置应用在通知中心显示!');
+//	}
+//}
+//createLocalPushMsg();
+
 			/**
 			 * 日志输入推送消息内容
 			 */
@@ -437,14 +463,14 @@
 					plus.storage.setItem("payload", msg.payload);
 					var shouche = plus.storage.getItem("shouche");
 					isserverlog = plus.storage.getItem('isServerlogin');
-					isserverlog =1;//测试用
+				//	isserverlog =1;//测试用
 					/*判空操作*/
 					if (isserverlog == null) {
 						plus.storage.setItem('isServerlogin', 0);
 					}
 					if ((isserverlog != 1) || (isserverlog != "1")) {
 					} else {											
-						mui.openWindow({
+						mui.openWindow({ 
 							id: "qiangdan",
 							url: "qiangdan.html",
 							extras: {
@@ -599,34 +625,7 @@
 				console.log(order_fee);
 				document.getElementById("qrurl").src = "http://wqq2.xyj0772.com/wxpay/example/native.php?order_pk="+order_pk+"&fee="+order_fee;
 				document.getElementById("pop_div").style.display = "block";
-				
-//				plus.nativeUI.confirm("货物已送达,将账单发送给用户？", function(e) {
-//					if (e.index == 0) {						
-//						var order_pk=document.getElementById("confirm_pay").getAttribute("order_pk");
-//						var url = request_url + "confirm_pay";
-//						mui.ajax(url, {
-//							data: {							
-//								"order_pk": order_pk
-//							},
-//							dataType: 'json', //服务器返回json格式数据
-//							type: 'post', //HTTP请求类型
-//							timeout: 5000, //超时时间设置为10秒；
-//							success: function(response) {	
-//								if (response.result == 100){										
-//									get_coach_order_info();
-//									mui.toast("余额支付成功!");
-//								}
-//								else {
-//									mui.toast("服务器处理异常!");
-//								} 
-//							},
-//							error: function(xhr, type, errorThrown) {
-//								//异常处理；
-//								console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
-//							}
-//						});	
-//					}
-//				}, "提示");				
+	
 			});
 			
 			//用户支付
@@ -678,10 +677,10 @@
 			});
 		}
 		function get_coach_order_info()
-		{	
+		{	//已接订单状态刷新
 			
 //			get_clientorder_list();//获得最新订单
-			setTimeout("get_coach_order_info()","2000");	
+			setTimeout("get_coach_order_info()","5000");	
 			var coach_pk = plus.storage.getItem('logincoach_pk');		
 			var url = request_url + "get_coach_order_info";
 			mui.ajax(url, {
@@ -692,7 +691,7 @@
 				type: 'post', //HTTP请求类型
 				timeout: 5000, //超时时间设置为10秒；
 				success: function(response) {	
-					 
+//					 console.log("get_coach_order_info() 已接订单状态刷新"+response.Table[0].order_state);
 					if(response.Table.length>0)
 					{
 						if(response.Table[0].order_state=="1")
@@ -709,7 +708,8 @@
 						{
 							nav_info();
 							up_car_point=new BMap.Point(response.Table[0].start_lon,response.Table[0].start_lat);	
-							GetAwayAndTime();
+//							GetAwayAndTime();
+//							GetOrderFee();
 							document.getElementById("order_div_3").style.display="block";
 							document.getElementById("go_to").setAttribute("order_pk",response.Table[0].order_pk);
 							go_end(response);							
@@ -721,7 +721,7 @@
 							document.getElementById("g_away").textContent=parseFloat(response.Table[0].order_away || 0);
 							document.getElementById("g_fee").textContent=parseFloat(response.Table[0].order_fee || 0);	
 							document.getElementById("confirm_pay").setAttribute("order_pk",response.Table[0].order_pk);							
-							setTimeout("get_coach_order_info()","2000");							
+//							setTimeout("get_coach_order_info()","2000");							
 						}
 						else if(response.Table[0].order_state=="0")
 						{				
@@ -730,16 +730,16 @@
 						else
 						{			
 							
-							document.getElementById("map").style.display="none";	
-							map.clearOverlays();
-							map.addOverlay(marker); //增加点
+//							document.getElementById("map").style.display="none";	
+//							map.clearOverlays();
+//							map.addOverlay(marker); //增加点
 							nav_info();
 							document.getElementById("order_div_1").style.display="block";
 						}
 					}
 					else {
-						map.clearOverlays();
-						map.addOverlay(marker); //增加点  
+//						map.clearOverlays();
+//						map.addOverlay(marker); //增加点  
 						nav_info();
 						document.getElementById("order_div_1").style.display="block";
 					}
@@ -872,16 +872,15 @@
 						preMarker.length = 0;
 					}
 					for (var i = 0; i < rsp.Table.length; i++) {
-						
 					var s = '{"Table":['+JSON.stringify(rsp.Table[i])+']}';
-					console.log(rsp.Table[i].orderid+" 最新订单ID:"+tan + " 未接订单:"+ rsp.Table.length);
+					console.log(" 最新订单ID:"+rsp.Table[i].orderid + " 已弹:"+ tan + "订单费用："+rsp.Table[i].order_fee);
+					
 					if(tan < rsp.Table[i].orderid ){ // < 	
-					 
-						//弹出抢单
+						//弹出抢单 
 						console.log('弹出抢单');
 						plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
 						qiangdan(s);//抢单
-			} 
+					} 
 						coachLatPosArr[i] = rsp.Table[i].start_lat;
 						coachLongtPosArr[i] = rsp.Table[i].start_lon;
 						coachOrderPkArr[i] = rsp.Table[i].order_pk;
@@ -891,7 +890,8 @@
 						start_addressArr[i] = rsp.Table[i].start_address;
 						end_addressArr[i] = rsp.Table[i].end_address;
 						if (coachLongtPosArr[i] != "") {
-							addMarker(new BMap.Point(coachLongtPosArr[i], coachLatPosArr[i]));
+							// 在地图中添加订单地址
+//							addMarker(new BMap.Point(coachLongtPosArr[i], coachLatPosArr[i]));
 						}
 					}
 				},
@@ -900,7 +900,7 @@
 					console.log("\n失败$$$$$" + xhr.status + "$$$" + type + "$$$" + errorThrown);
 				}
 			});
-			setTimeout("get_clientorder_list()", 2000);
+			setTimeout("get_clientorder_list()", 10000);
 		}
 		var First = true;
 		var marker;
@@ -1098,7 +1098,8 @@
 			setTimeout("post_coach_info()", 2000);
 		}
 		function GetAwayAndTime()
-		{		
+		{	
+			//重新按时间、里程计算
 			if(up_car_point!=null) 
 			{
 				if((mPoint || null)==null ) {
@@ -1130,11 +1131,40 @@
 							document.getElementById("al_away").innerHTML=parseFloat(rsp.Table[0].order_away || 0);
 							document.getElementById("al_fee").innerHTML=parseFloat(rsp.Table[0].order_fee || 0);	
 							var order_fee = rsp.Table[0].order_fee;
+							console.log('订单费用：'+order_fee);
 							plus.storage.setItem("order_fee",order_fee);
 						}						
 					}
 				});				
 			}
+		}
+		function GetOrderFee()
+		{					
+				var order_pk=document.getElementById("go_to").getAttribute("order_pk");
+				if((order_pk || null)==null ) {
+					setTimeout("GetOrderFee()", 2000);
+					return;
+				}
+				var url = request_url + "get_order_fee2";
+				mui.ajax(url, {
+					data: {
+						"order_pk": order_pk
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 5000, //超时时间设置为5秒；
+					success: function(rsp) {					
+						if(rsp!=null) 
+						{
+							up_car_point=mPoint;
+							document.getElementById("al_away").innerHTML=parseFloat(rsp.Table[0].order_away || 0);
+							document.getElementById("al_fee").innerHTML=parseFloat(rsp.Table[0].order_fee || 0);	
+							var order_fee = rsp.Table[0].order_fee;
+							console.log('订单费用：'+order_fee);
+							plus.storage.setItem("order_fee",order_fee);
+						}						
+					}
+				});		
 		}
 		/*回到当前位置点击事件 */
 		var back_current_position = document.getElementById("back_current_position");

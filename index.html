@@ -115,32 +115,37 @@
 	<div class="ad mui-slider" style="margin-top: 50px;">
 	  <div class="mui-slider-group mui-slider-loop">
 	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad1.html"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad2.html"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad3.html"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad4.html"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
  	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	    		<a href="http://b00d.cn/dl/jp/ad1.html"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
 	  </div>
 	</div>
 	<div class="ad mui-slider" style="">
 	  <div class="mui-slider-group mui-slider-loop">
 	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad1.html"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad2.html"><img src="http://mytv-10005639.file.myqcloud.com/ad2.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad3.html"><img src="http://mytv-10005639.file.myqcloud.com/ad3.jpg" /></a></div>
 	    	<div class="mui-slider-item">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
+	    		<a href="http://b00d.cn/dl/jp/ad4.html"><img src="http://mytv-10005639.file.myqcloud.com/ad4.jpg" /></a></div>
  	    	<div class="mui-slider-item mui-slider-item-duplicate">
-	    		<a href="#"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
+	    		<a href="http://b00d.cn/dl/jp/ad1.html"><img src="http://mytv-10005639.file.myqcloud.com/ad1.jpg" /></a></div>  
 	  </div>
 	</div>
-	
+	<script>
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+		  interval:4000//自动轮播周期，若为0则不自动播放，默认为0；
+		});
+	</script>
 	<div class="mui-content" style="background:#fff!important">
 			<nav class="mui-bar-tab bar_transparent" id="order_div_1" style="height:160px;text-align:center;background:#fff!important">
 				<!--<a class="mui-tab-item" id="date_car">
@@ -432,7 +437,7 @@
 					logoutPushMsg(msg);
 					console.log('111 接单模式');
 				}else{
-					logoutPushMsg(msg);  //原无
+					//logoutPushMsg(msg);  原无
 					console.log('000 接单模式 关闭');
 				}
 			}, false);
@@ -469,14 +474,31 @@
 						plus.storage.setItem('isServerlogin', 0);
 					}
 					if ((isserverlog != 1) || (isserverlog != "1")) {
-					} else {											
-						mui.openWindow({ 
-							id: "qiangdan",
-							url: "qiangdan.html",
-							extras: {
-								param: msg.payload
-							}
-						});						
+					} else {
+						// 查找最新订单并弹出 START
+						var url = request_url + "get_lastest_order";
+						mui.ajax(url,{
+							dataType: 'json',
+							type: 'post',
+							timeout: 5000,
+							success: function(response){
+								var s = '{"Table": ['+JSON.stringify(response.Table[0])+']}';
+									console.log(response.Table[0]);
+									qiangdan(s);
+								},
+									error: function(xhr, type, errorThrown){
+										console.log("\n失败$$$$$" + xhr.status + "$$$" + type +"$$$" + errorThrown);
+									}
+						});
+						// 查找最新订单并弹出 END
+
+						// mui.openWindow({ 
+						// 	id: "qiangdan",
+						// 	url: "qiangdan.html",
+						// 	extras: {
+						// 		param: msg.payload
+						// 	}
+						// });						
 					}
 					console.log(msg.payload);
 				} else {

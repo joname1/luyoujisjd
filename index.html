@@ -12,7 +12,7 @@
 		<link rel="stylesheet" href="css/common.css">
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ylg8yBCSUPFnuu82sDnIbZ5H"></script>
-		<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+		<!--<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">-->
 		<script type="text/javascript" src="js/request_url.js"></script>
 		<style>
 			html,
@@ -306,36 +306,31 @@
 				});
 			}
 			
-//			  // 设置APP图标的角标
-//  console.log('设置角标');
-//  plus.runtime.setBadgeNumber('5'); 
-
-
 
 			//检查更新	
-			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {					
-				mui.ajax(request_url + "get_update", {	
-					data: {
-						"_type":2,
-						"version": wgtinfo.version
-					},
-					dataType: 'json', //服务器返回json格式数据
-					type: 'post', //HTTP请求类型
-					timeout: 5000, //超时时间设置为5秒； 
-					success: function(rsp) {	
-						console.log(JSON.stringify(rsp));
-						if(parseInt(rsp.result)==100) 
-						{
-							 var btnArray = ['更新', '取消'];
-							mui.confirm('系统有更新，立即更新？', '系统提示', btnArray, function(e) {
-								if (e.index == 0) {
-									plus.runtime.openURL(request_img_url+"down_ser.aspx");									
-								} 
-							});
-						}						
-					}
-				});				
-			});
+//			plus.runtime.getProperty( plus.runtime.appid, function ( wgtinfo ) {					
+//				mui.ajax(request_url + "get_update", {	
+//					data: {
+//						"_type":2,
+//						"version": wgtinfo.version
+//					},
+//					dataType: 'json', //服务器返回json格式数据
+//					type: 'post', //HTTP请求类型
+//					timeout: 5000, //超时时间设置为5秒； 
+//					success: function(rsp) {	
+//						console.log(JSON.stringify(rsp));
+//						if(parseInt(rsp.result)==100) 
+//						{
+//							 var btnArray = ['更新', '取消'];
+//							mui.confirm('系统有更新，立即更新？', '系统提示', btnArray, function(e) {
+//								if (e.index == 0) {
+//									plus.runtime.openURL(request_img_url+"down_ser.aspx");									
+//								} 
+//							});
+//						}						
+//					}
+//				});				
+//			});
 			//获取司机订单信息
 			get_coach_order_info();
 			/*调用初始化定位信息*/
@@ -399,7 +394,8 @@
 //					pop_div.style.display = "none";
 //				} 
 			})
-			plus.push.setAutoNotification(false);
+			plus.push.setAutoNotification(true);
+			console.log('dddsss');
 			var info = plus.push.getClientInfo();
 			console.log("获取客户端推送标识信息：");
 			console.log("token: " + info.token);
@@ -750,18 +746,16 @@
 							qiangdan(response.Table[0]);//抢单 
 						}
 						else
-						{			
-							
-//							document.getElementById("map").style.display="none";	
-//							map.clearOverlays();
-//							map.addOverlay(marker); //增加点
+						{							
+							map.clearOverlays();
+							map.addOverlay(marker); //增加点
 							nav_info();
 							document.getElementById("order_div_1").style.display="block";
 						}
 					}
 					else {
-//						map.clearOverlays();
-//						map.addOverlay(marker); //增加点  
+						map.clearOverlays();
+						map.addOverlay(marker); //增加点  
 						nav_info();
 						document.getElementById("order_div_1").style.display="block";
 					}
@@ -857,6 +851,9 @@
 		/*获取客户端提交的订单列表*/
 			var tan =0 ;
 		function get_clientorder_list() {
+			// 清空APP图标的角标
+    console.log('设置APP图标的角标');
+    plus.runtime.setBadgeNumber('0'); 
 			coachLatPosArr = new Array();
 			coachLongtPosArr = new Array(); 
 			coachOrderPkArr = new Array();
@@ -899,9 +896,9 @@
 					
 					if(tan < rsp.Table[i].orderid ){ // < 	
 						//弹出抢单 
-						console.log('弹出抢单');
-						plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
-						qiangdan(s);//抢单
+					//	console.log('弹出抢单');
+					//	plus.storage.setItem("tan",rsp.Table[i].orderid);	//存入最新ID
+					//	qiangdan(s);//抢单
 					} 
 						coachLatPosArr[i] = rsp.Table[i].start_lat;
 						coachLongtPosArr[i] = rsp.Table[i].start_lon;
@@ -913,7 +910,7 @@
 						end_addressArr[i] = rsp.Table[i].end_address;
 						if (coachLongtPosArr[i] != "") {
 							// 在地图中添加订单地址
-//							addMarker(new BMap.Point(coachLongtPosArr[i], coachLatPosArr[i]));
+							addMarker(new BMap.Point(coachLongtPosArr[i], coachLatPosArr[i]));
 						}
 					}
 				},
@@ -959,7 +956,7 @@
 			map.addOverlay(marker); //增加点
 			plus.storage.setItem("coach_lon", longt + "");
 			plus.storage.setItem("coach_lat", lat + "");
-			setTimeout("getPosBaidu()", 2000);
+			setTimeout("getPosBaidu()", 20000);
 		}
 
 		function GetLabel(x, y, curr_address) {
@@ -1016,7 +1013,7 @@
 		}
 
 		function run() {
-			if (linesPoints.length == 0) setTimeout("getPosBaidu()", 2000);
+			if (linesPoints.length == 0) setTimeout("getPosBaidu()", 20000);
 			for (var m = 0; m < linesPoints.length; m++) {
 				var pts = linesPoints[m];
 				var len = pts.length;
@@ -1037,7 +1034,7 @@
 				bounds = new Array();
 				linesPoints = new Array();
 				GetAddress();
-				setTimeout("getPosBaidu()", 2000);
+				setTimeout("getPosBaidu()", 20000);
 			}
 		}
 
@@ -1080,7 +1077,7 @@
 			}, {
 				provider: 'baidu'
 			});
-			setTimeout("getPosBaidu()", 1000);
+			setTimeout("getPosBaidu()", 20000);
 		}
 		/*增加首页默认滑动事件*/
 		function defaultShowSlide() {
@@ -1117,7 +1114,7 @@
 				});
 			}
 		//	console.log('更新司机地址');
-			setTimeout("post_coach_info()", 2000);
+			setTimeout("post_coach_info()", 6000);
 		}
 		function GetAwayAndTime()
 		{	
@@ -1125,7 +1122,7 @@
 			if(up_car_point!=null) 
 			{
 				if((mPoint || null)==null ) {
-					setTimeout("GetAwayAndTime()", 2000);
+					setTimeout("GetAwayAndTime()", 7000);
 					return;
 				}
 				var away=map.getDistance(up_car_point,mPoint);			
@@ -1133,7 +1130,7 @@
 				var order_pk=document.getElementById("go_to").getAttribute("order_pk");
 				 
 				if((order_pk || null)==null ) {
-					setTimeout("GetAwayAndTime()", 2000);
+					setTimeout("GetAwayAndTime()", 8000);
 					return;
 				}
 				var url = request_url + "get_order_fee";
@@ -1146,7 +1143,7 @@
 					type: 'post', //HTTP请求类型
 					timeout: 5000, //超时时间设置为5秒；
 					success: function(rsp) {						
-						setTimeout("GetAwayAndTime()", 2000);
+						setTimeout("GetAwayAndTime()", 9000);
 						if(rsp!=null) 
 						{
 							up_car_point=mPoint;
@@ -1164,7 +1161,7 @@
 		{					
 				var order_pk=document.getElementById("go_to").getAttribute("order_pk");
 				if((order_pk || null)==null ) {
-					setTimeout("GetOrderFee()", 2000);
+					setTimeout("GetOrderFee()", 8000);
 					return;
 				}
 				var url = request_url + "get_order_fee2";
